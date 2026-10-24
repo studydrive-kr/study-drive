@@ -680,7 +680,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
           <div class="btnrow" id="quitConfirm" hidden><span class="small">도장과 보상 없이 끝내고 지금 있던 곳에 남아요. 공부한 시간은 기록돼요.</span><button class="btn stop" id="quitYes" type="button">그만두기 확인</button><button class="btn ghost" id="quitNo" type="button">계속 가기</button></div>
         </div>
         <div class="btnrow" id="driveCtrls"><button class="btn stop big wide" id="shelterBtn" type="button">졸음쉼터 정차</button></div>
-        <label class="check small" style="justify-content:center"><input type="checkbox" id="guardOn" checked> 딴짓 감지 · 다른 탭이나 앱으로 가면 자동으로 졸음쉼터에 정차</label>
+        <p class="small muted" style="text-align:center;margin:0" id="guardNote">딴짓 감지 중 · 다른 탭이나 앱으로 가면 자동으로 졸음쉼터에 정차해요</p>
       </section>
 
       <!-- ARRIVE -->
@@ -763,7 +763,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
         </section>
         <section class="slide" aria-roledescription="쪽" aria-label="4 / 8 딴짓 감지">
           <svg class="art" viewBox="0 0 220 130" role="img" aria-label="딴짓 감지 그림"><rect x="0" y="0" width="220" height="130" rx="16" fill="#9fe6da"/><path d="M10 112 q8 -6 16 0 t16 0 M150 22 q8 -6 16 0 t16 0" stroke="#d6f6f0" stroke-width="2.4" fill="none" stroke-linecap="round"/><g transform="translate(40,18)"><rect x="4" y="5" width="56" height="96" rx="12" fill="#1c2430"/><rect x="0" y="0" width="56" height="96" rx="12" fill="#2b3442"/><rect x="5" y="10" width="46" height="72" rx="6" fill="#ff6b6b"/><path d="M20 34 L38 46 L20 58Z" fill="#fff"/><circle cx="28" cy="88" r="3" fill="#7c8a96"/></g><g transform="translate(118,26)"><path d="M38 0 L76 66 H0 Z" fill="#ffd457" stroke="#7a2a12" stroke-width="4" stroke-linejoin="round"/><rect x="34.5" y="20" width="7" height="26" rx="3.5" fill="#7a2a12"/><circle cx="38" cy="55" r="4.5" fill="#7a2a12"/></g><rect x="112" y="98" width="96" height="22" rx="8" fill="#e5533a" stroke="#fff" stroke-width="2"/><text x="160" y="114" text-anchor="middle" font-family="Jua,sans-serif" font-size="14" fill="#fff">졸음쉼터 정차</text></svg>
-          <div class="stxt"><span class="pg num">4 / 8</span><h3>딴짓 감지</h3><p>공부 중에 다른 탭이나 앱(게임·유튜브·SNS 등)으로 가면 "운전 중 전자기기 사용" 경고와 함께 졸음쉼터에 자동으로 정차해요. 휴게소에서 쉴 때는 괜찮아요.</p></div>
+          <div class="stxt"><span class="pg num">4 / 8</span><h3>딴짓 감지</h3><p>공부 중에 다른 탭이나 앱(게임·유튜브·SNS 등)으로 가면 "운전 중 전자기기 사용" 경고와 함께 졸음쉼터에 자동으로 정차해요. 휴게소에서 쉴 때는 괜찮아요. 경고는 매일 밤 12시에 0으로 돌아가요. 하루 3번째 경고에 코인 1개, 그 뒤로 2번마다(5·7·9·11번째) 1개씩 벌금이 빠지고, 하루 벌금은 최대 5개까지예요.</p></div>
         </section>
         <section class="slide" aria-roledescription="쪽" aria-label="5 / 8 코인과 톨게이트">
           <svg class="art" viewBox="0 0 220 130" role="img" aria-label="코인과 톨게이트 그림"><rect x="0" y="0" width="220" height="130" rx="16" fill="#9fe6da"/><path d="M10 112 q8 -6 16 0 t16 0 M150 22 q8 -6 16 0 t16 0" stroke="#d6f6f0" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M40 112 Q30 70 62 46 Q96 22 150 34 Q192 44 186 82 Q182 112 140 116 Z" fill="#7fb43d" transform="translate(0,7)"/><path d="M40 112 Q30 70 62 46 Q96 22 150 34 Q192 44 186 82 Q182 112 140 116 Z" fill="#c9ec74" stroke="#fff" stroke-width="2.5"/><svg x="34" y="44" width="72" height="60"><use href="#s-toll"/></svg><svg x="120" y="30" width="34" height="34"><use href="#s-coin"/></svg><svg x="150" y="50" width="34" height="34"><use href="#s-coin"/></svg><svg x="126" y="72" width="34" height="34"><use href="#s-coin"/></svg><g font-family="Jua,sans-serif" font-size="18"><rect x="36" y="16" width="44" height="24" rx="10" fill="#fff"/><text x="58" y="34" text-anchor="middle" fill="#e5533a">−1</text><rect x="160" y="16" width="44" height="24" rx="10" fill="#fff"/><text x="182" y="34" text-anchor="middle" fill="#2f8f4e">+7</text></g></svg>
@@ -889,6 +889,21 @@ const VH=4/3,FULL={x:0,y:(MAP.H-MAP.W*VH)/2,w:MAP.W,h:MAP.W*VH};
 const prj=(la,lo)=>[(lo-MAP.LON0)*MAP.CK*MAP.S,(MAP.LAT0-la)*MAP.S];
 const DAY=864e5;
 const kstDate=(t=Date.now())=>new Date(t+9*3600e3).toISOString().slice(0,10);
+/* 딴짓 경고: 한국 시간 자정마다 0으로 돌아가요.
+   벌금은 3번째 경고에 코인 1개, 그 뒤 2번마다 1개씩(5·7·9·11번째), 하루 최대 5개까지. */
+const FINE_FROM=3,FINE_EVERY=2,FINE_MAX=5;
+function warnToday(){if(!S)return 0;const d=kstDate();if(S.warnDay!==d){S.warnDay=d;S.warnToday=0;S.warnFineToday=0;}return S.warnToday||0;}
+function finesAt(n){return n>=FINE_FROM&&(n-FINE_FROM)%FINE_EVERY===0;}
+function nextFines(){const n=warnToday();return finesAt(n+1)&&(S.warnFineToday||0)<FINE_MAX;}
+function addWarning(T){warnToday();S.warnToday=(S.warnToday||0)+1;S.warnings=(S.warnings||0)+1;
+  const fine=finesAt(S.warnToday)&&(S.warnFineToday||0)<FINE_MAX?1:0;if(fine){S.coins-=1;S.warnFineToday=(S.warnFineToday||0)+1;}
+  T.warnN=S.warnToday;T.warnFine=fine;return fine;}
+function warnMsg(n,fine){const paid=S.warnFineToday||0;
+  if(fine)return `오늘 경고 ${n}번째 · 벌금으로 코인 1개가 빠졌어요 (오늘 벌금 ${paid}/${FINE_MAX}개)${S.coins<0?` · 빚 ${-S.coins}`:""}.`;
+  if(n<FINE_FROM-1)return `오늘 경고 ${n}번째예요. ${FINE_FROM}번째 경고부터 벌금(코인 −1)이 있어요.`;
+  if(paid>=FINE_MAX)return `오늘 경고 ${n}번째예요. 오늘 벌금은 최대 ${FINE_MAX}개를 다 채웠어요.`;
+  if(finesAt(n+1))return `오늘 경고 ${n}번째예요. 다음 경고에는 벌금(코인 −1)이 붙어요.`;
+  return `오늘 경고 ${n}번째예요.`;}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 
 /* ================= nickname filter ================= */
@@ -1462,7 +1477,8 @@ function renderDrive(force){const T=S.trip;if(!T)return;const now=Date.now(),d=B
   $("#restBox").hidden=T.state!=="rest";$("#shelterBox").hidden=T.state!=="shelter";$("#driveCtrls").hidden=T.state!=="drive";
   if(T.state==="rest"){$("#restName").textContent=(T.stops[T.restsTaken]||{}).name||"휴게소";$("#restClock").textContent=fmtMS((T.restEnd-now)/1000);}
   const phone=T.state==="shelter"&&T.pauseReason==="phone";$("#warnBar").hidden=!phone;$("#shelterTitle").textContent=phone?"자동으로 졸음쉼터에 정차했어요":"잠깐 정차했어요";
-  if(phone)$("#warnText").textContent=`공부 중에 다른 탭이나 앱으로 넘어갔어요. 경고 ${S.warnings||1}번째예요. 돌아왔으면 다시 출발하세요.`;
+  if(phone)$("#warnText").textContent=`공부 중에 다른 탭이나 앱으로 넘어갔어요. ${warnMsg(T.warnN||warnToday()||1,T.warnFine||0)} 돌아왔으면 다시 출발하세요.`;
+  {const n=warnToday();$("#guardNote").textContent=`딴짓 감지 중 · 다른 탭이나 앱으로 가면 자동으로 졸음쉼터에 정차해요 · 오늘 경고 ${n}번`+(nextFines()?" · 다음 경고는 벌금":"");}
   if(T.state==="shelter"){const s=(now-T.pausedAt)/1000;$("#shelterFor").textContent=`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;}else{$("#quitConfirm").hidden=true;$("#quitBtn").hidden=false;}
   updateVeh(ME,p.leg.kind,p.x,p.y,p.dx,p.dy,T.state,S.coins<0);
   if(force||now-lastRouteDraw>2000){drawRoute(T.legs,st,T.totalSec);lastRouteDraw=now;}
@@ -1610,12 +1626,12 @@ setInterval(()=>{if(S&&S.trip){advance(Date.now());if(S&&S.trip&&!$("#drive").hi
   if(S&&!$("#home").hidden&&S.pick.lockUntil)renderTokens();},250);
 setInterval(renderOthers,1000);
 setInterval(applySky,60000);
-let guardOn=true;try{guardOn=localStorage.getItem("sdrive-guard")!=="off";}catch(e){}
-$("#guardOn").checked=guardOn;$("#guardOn").addEventListener("change",e=>{guardOn=e.target.checked;try{localStorage.setItem("sdrive-guard",guardOn?"on":"off");}catch(e){}toast(guardOn?"딴짓 감지를 켰어요":"딴짓 감지를 껐어요");});
+/* 딴짓 감지는 항상 켜져 있어요(끌 수 없음). 예전에 꺼 둔 설정도 무시해요. */
+const guardOn=true;try{localStorage.removeItem("sdrive-guard");}catch(e){}
 document.addEventListener("visibilitychange",()=>{
-  if(document.hidden){if(guardOn&&S&&S.trip&&S.trip.state==="drive"){advance(Date.now());const T=S.trip;if(T&&T.state==="drive"){const now=Date.now();T.acc=studied(now);T.state="shelter";T.pausedAt=now;T.pauseReason="phone";T.warnPending=true;markLive(T);S.warnings=(S.warnings||0)+1;save();}}return;}
+  if(document.hidden){if(guardOn&&S&&S.trip&&S.trip.state==="drive"){advance(Date.now());const T=S.trip;if(T&&T.state==="drive"){const now=Date.now();T.acc=studied(now);T.state="shelter";T.pausedAt=now;T.pauseReason="phone";T.warnPending=true;markLive(T);addWarning(T);save();}}return;}
   applySky();
-  if(S&&S.trip&&S.trip.warnPending){S.trip.warnPending=false;save();chime("warn");toast(`운전 중 전자기기 사용 경고 ${S.warnings}번째 · 졸음쉼터에 정차했어요`);if(!$("#drive").hidden)renderDrive(true);}
+  if(S&&S.trip&&S.trip.warnPending){S.trip.warnPending=false;save();chime("warn");toast(S.trip.warnFine?`운전 중 전자기기 사용 · 오늘 경고 ${S.trip.warnN}번째 · 벌금 코인 −${S.trip.warnFine}`:`운전 중 전자기기 사용 경고 · 오늘 ${S.trip.warnN}번째 · 졸음쉼터에 정차했어요`);renderCoins();if(!$("#drive").hidden)renderDrive(true);}
   if(S&&S.trip&&S.trip.state==="drive")wakeOn();});
 window.addEventListener("resize",()=>{placeAll();if(!$("#home").hidden)sizeCanvas();});
 document.fonts&&document.fonts.ready.then(()=>drawWheel());
