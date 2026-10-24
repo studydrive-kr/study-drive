@@ -1216,7 +1216,7 @@ function save(){if(!S||!accId)return;S.updated=Date.now();
     const row={n:bd.nick,t:bd.trips,m:bd.min,k:bd.km},rj=JSON.stringify(row);
     mergeBoard();
     chain=chain.then(()=>{if(pj===lastPlayerJSON)return;return F.setDoc(F.doc(db,"players",id),{data,updated:Date.now()}).then(()=>{lastPlayerJSON=pj;});})
-      .then(()=>{if(lj===lastBoardJSON)return;return F.setDoc(F.doc(db,"board",id),{...live,updated:Date.now()}).then(()=>{lastBoardJSON=lj;});})
+      .then(()=>{if(lj===lastBoardJSON)return;return F.setDoc(F.doc(db,"board",id),{...live,updated:Date.now()}).then(()=>{lastBoardJSON=lj;setTimeout(refreshLiveCount,1500);});})
       .then(()=>{if(rj===lastRowJSON||rowBlocked)return;const u=Date.now();
         return F.setDoc(F.doc(db,"meta","board"),{rows:{[id]:{...row,u}}},{merge:true}).then(()=>{lastRowJSON=rj;patchCache(id,{nick:row.n,trips:row.t,min:row.m,km:row.k,updated:u});})
           .catch(e=>{if(e&&e.code==="permission-denied"){rowBlocked=true;console.warn("meta/board 규칙이 아직 없어요",e);}else throw e;});})
@@ -1255,7 +1255,13 @@ async function loadBoard(force=false){const {F,db}=CLOUD;
 function subscribeLive(){const {F,db}=CLOUD;if(liveUnsub)liveUnsub();
   liveUnsub=F.onSnapshot(F.query(F.collection(db,"board"),F.where("liveUntil",">",Date.now()),F.orderBy("liveUntil","desc"),F.limit(15)),snap=>{
     LIVE=new Map(snap.docs.map(d=>[d.id,parseLiveDoc(d.id,d.data())]));liveReady=true;mergeBoard();},err=>{console.error(err);});}
-function subscribeCloudBoard(){loadBoard();subscribeLive();}
+/* total number of drivers on the road: a count query (1 read) every 10 min, not the cars themselves */
+const MAX_CARS=15;let LIVE_TOTAL=null,liveCntAt=0,liveCntBusy=false;
+async function refreshLiveCount(){if(!CLOUD||liveCntBusy||typeof CLOUD.F.getCountFromServer!=="function")return;liveCntBusy=true;const {F,db}=CLOUD;
+  try{const sn=await F.getCountFromServer(F.query(F.collection(db,"board"),F.where("liveUntil",">",Date.now())));LIVE_TOTAL=sn.data().count;liveCntAt=Date.now();renderOthers();}
+  catch(e){console.warn("count",e);liveCntAt=Date.now();}finally{liveCntBusy=false;}}
+setInterval(()=>{if(CLOUD&&!document.hidden&&Date.now()-liveCntAt>=10*60e3)refreshLiveCount();},30000);
+function subscribeCloudBoard(){loadBoard();subscribeLive();refreshLiveCount();}
 $("#lbRefresh").addEventListener("click",()=>{if(!CLOUD){localBoard();return;}
   if(Date.now()-boardAt<60e3){toast("방금 불러온 순위예요. 1분 뒤에 다시 눌러 주세요.");return;}
   $("#boardNote").textContent="불러오는 중…";loadBoard(true);});
@@ -1528,15 +1534,17 @@ function renderBoard(){
 /* ================= other drivers ================= */
 const OTHERS=new Map();
 function renderOthers(){
-  const now=Date.now(),seen=new Set();let live=0;
-  for(const b of BOARD){if(!b||b.id===accId||!isLive(b,now))continue;live++;if(live>15)break;
+  const now=Date.now(),seen=new Set();let live=0,cars=0;
+  for(const b of BOARD){if(!b||b.id===accId||!isLive(b,now))continue;live++;if(cars>=MAX_CARS)continue;cars++;
     const L=b.live,T={legs:L.legs.map(a=>({from:{la:a[0],lo:a[1]},to:{la:a[2],lo:a[3]},kind:a[4],min:a[5]})),totalSec:L.totalSec};
     const E=estLive(L,now),st=E.st,p=posAt(T,st);
     let h=OTHERS.get(b.id);if(!h){h={o:null,key:null};OTHERS.set(b.id,h);}seen.add(b.id);
     updateVeh(h,p.leg.kind,p.x,p.y,p.dx,p.dy,E.state,!!b.debt||(b.coins||0)<0,false,"");}
   for(const [id,h] of OTHERS)if(!seen.has(id)){removeBB(h.o);OTHERS.delete(id);}
   const sig=[...seen].sort().map(id=>{const b=BOARD.find(x=>x.id===id);return id+":"+(b&&b.live?b.live.totalSec+"/"+b.live.legs.length:"");}).join(",");if(sig!==renderOthers.sig){renderOthers.sig=sig;drawOtherRoutes(seen);}
-  const lc=$("#liveCount");lc.hidden=!live;lc.textContent=`지금 달리는 운전자 ${live}명`;
+  const meOn=!!(S&&S.trip&&(()=>{const L=liveOf(S.trip);return !L.until||L.until>now;})()),local=live+(meOn?1:0);
+  const total=CLOUD&&LIVE_TOTAL!=null?Math.max(LIVE_TOTAL,local):local;
+  const lc=$("#liveCount");lc.hidden=!total;lc.textContent=`지금 달리는 운전자 ${total}명`+(total>local?` · 지도엔 최근 ${cars+(meOn?1:0)}대`:"");
 }
 
 function drawOtherRoutes(ids){if(!G.others)return;G.others.innerHTML="";
