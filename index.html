@@ -262,8 +262,12 @@ input:focus,select:focus{border-color:var(--accent);outline:none}
 #board .tabs button{padding:5px 11px;font-size:13px}
 .myrank{padding:8px 14px}
 
+.credit{text-align:center;font-size:13px;color:var(--muted);padding:6px 0 0;letter-spacing:.02em}
 /* top blocks & modals */
 .blocks{display:flex;gap:8px}
+.blockbtn{position:relative}
+.newdot{position:absolute;top:5px;right:6px;width:11px;height:11px;border-radius:50%;background:#e5533a;box-shadow:0 0 0 2px var(--card)}
+#attendModal .attend .aday .c{max-width:46px}
 .blockbtn{width:58px;height:58px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(var(--card),var(--card-2));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
   font-size:11px;font-weight:700;color:var(--ink);box-shadow:0 6px 0 var(--card-edge),0 10px 14px -8px rgba(0,0,0,.35),inset 0 2px 0 rgba(255,255,255,.6);transition:transform .08s,box-shadow .08s}
 .blockbtn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--card-edge)}
@@ -540,6 +544,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
     <div class="tools">
       <div class="blocks" id="blocks" hidden>
         <button type="button" class="blockbtn" id="manualBtn" aria-label="운전 설명서 열기"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="6" y="3" width="18" height="22" rx="3" fill="#f6f0dc"/><rect x="4" y="2" width="18" height="22" rx="3" fill="#2f9e55"/><rect x="4" y="2" width="5" height="22" rx="2" fill="#23743d"/><rect x="11" y="7" width="8" height="2.4" rx="1.2" fill="#fff"/><rect x="11" y="11" width="6" height="2" rx="1" fill="#cfeedb"/><circle cx="6.5" cy="7" r="1" fill="#fff"/><circle cx="6.5" cy="12" r="1" fill="#fff"/><circle cx="6.5" cy="17" r="1" fill="#fff"/></svg><span>설명서</span></button>
+        <button type="button" class="blockbtn" id="attendOpen" aria-label="매일 출석 열기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6" width="22" height="19" rx="4" fill="#ffffff" stroke="#d9a01e" stroke-width="1.6"/><rect x="3" y="6" width="22" height="6" rx="3" fill="#ffd457"/><rect x="8" y="3" width="3" height="6" rx="1.5" fill="#d9a01e"/><rect x="17" y="3" width="3" height="6" rx="1.5" fill="#d9a01e"/><circle cx="14" cy="18.5" r="4.6" fill="url(#gCoin)" stroke="#c98a0e" stroke-width="1"/></svg><span>출석</span><i class="newdot" id="attendDot" hidden></i></button>
         <button type="button" class="blockbtn" id="shareBtn" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 14 L19 8 M9 14 L19 20" stroke="#3a74c8" stroke-width="2.6" stroke-linecap="round"/><circle cx="8" cy="14" r="4.2" fill="#6aaef7" stroke="#3a74c8" stroke-width="1.6"/><circle cx="20" cy="7.5" r="4.2" fill="#ffd457" stroke="#d9a01e" stroke-width="1.6"/><circle cx="20" cy="20.5" r="4.2" fill="#ff9ec7" stroke="#d9669a" stroke-width="1.6"/></svg><span>공유</span></button>
       </div>
       <span class="coinbadge" id="coinBadge" hidden><svg width="26" height="26"><use href="#s-coin"/></svg><span id="coinVal">5</span><span class="tag" id="coinTag">코인</span></span>
@@ -604,11 +609,6 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
       <!-- HOME -->
       <section class="card stack" id="home" hidden>
         <div class="here"><svg width="30" height="44"><use href="#s-start"/></svg><div><div class="k">지금 있는 곳 · 여기서 출발</div><div class="v" id="hereName"></div></div></div>
-        <div class="stack" style="gap:8px">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><b style="font-family:var(--f-display);font-weight:400;font-size:18px">매일 출석</b><span class="small muted" id="attendInfo"></span></div>
-          <div class="attend" id="attend"></div>
-          <button class="btn gold wide" id="attendBtn" type="button">오늘 출석 체크</button>
-        </div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
           <div class="stagebar" id="stagebar"></div>
           <div class="tokens" title="목적지 변경 가능 횟수"><span class="small muted">변경</span><span class="tok" id="tk0"></span><span class="tok" id="tk1"></span><span class="tok" id="tk2"></span></div>
@@ -721,6 +721,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
     <div id="bookList" style="margin-top:6px"></div>
   </section>
 
+  <footer class="credit">© 2026 Zi · 무단 복제 금지</footer>
 </div>
 <div class="modal" id="rulesModal" hidden>
   <div class="sheet manual" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
@@ -770,6 +771,17 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
     </div>
   </div>
 </div>
+<div class="modal" id="attendModal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="attendTitle">
+    <div class="pages">
+      <div class="mhead"><h2 id="attendTitle">매일 출석</h2><button type="button" class="pill" id="attendClose">닫기</button></div>
+      <p class="small muted" id="attendInfo" style="margin:0"></p>
+      <div class="attend" id="attend"></div>
+      <button class="btn gold big wide" id="attendBtn" type="button">오늘 출석 체크</button>
+      <p class="mfoot">1~6일차는 코인 3개, 7일차는 10개를 받고 다시 1일차부터 돌아요. 날짜는 한국 시간 기준이에요.</p>
+    </div>
+  </div>
+</div>
 <div class="modal" id="shareModal" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
     <div class="pages">
@@ -777,7 +789,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
       <div class="field"><label for="shareLink">링크</label><div class="row" style="flex-wrap:nowrap"><input id="shareLink" type="text" readonly style="flex:1 1 auto"><button class="btn" type="button" id="copyLink" style="flex:0 0 auto">링크 복사</button></div></div>
       <div class="field"><label for="shareMsg">보낼 메시지</label><textarea id="shareMsg" rows="3" readonly></textarea><button class="btn ghost" type="button" id="copyMsg">메시지 복사</button></div>
       <div class="qrbox" id="qrWrap" hidden><div id="qr"></div><span class="small muted">휴대폰 카메라로 찍으면 바로 열려요</span></div>
-      <p class="note">이 페이지를 웹에 올려 두면(예: Firebase Hosting, GitHub Pages) 링크와 QR로 공유할 수 있어요. Firebase에 연결돼 있으면 친구도 같은 순위표에서 함께 달려요.</p>
+      <p class="note">링크나 QR을 친구에게 보내면 각자 면허를 발급받고 같은 순위표에서 함께 달려요.</p>
     </div>
   </div>
 </div>
@@ -1122,9 +1134,9 @@ const EMAIL_DOMAIN="studydrive.example.com";
 const fbLoaded=new Promise(r=>{if(window.FB_DONE)r();else{window.addEventListener("fb-ready",()=>r(),{once:true});setTimeout(r,12000);}});
 const storeReady=fbLoaded.then(()=>{
   if(window.FB){CLOUD=window.FB;
-    $("#storeNote").textContent="Firebase에 연결됐어요. 어느 기기에서든 같은 닉네임·비밀번호로 이어 달릴 수 있어요. 다른 사이트 비밀번호는 쓰지 마세요.";
+    $("#storeNote").textContent="어느 기기에서든 같은 닉네임·비밀번호로 이어 달릴 수 있어요. 다른 사이트에서 쓰는 비밀번호는 쓰지 마세요.";
     $("#boardNote").textContent="불러오는 중…";subscribeCloudBoard();}
-  else{$("#storeNote").textContent=(window.FIREBASE_CONFIG&&window.FIREBASE_CONFIG.apiKey?"Firebase에 연결하지 못해서 ":"")+"기록은 이 브라우저에 저장돼요. 같은 브라우저에서 닉네임·비밀번호로 이어 달릴 수 있어요. 다른 사이트 비밀번호는 쓰지 마세요.";
+  else{$("#storeNote").textContent=(window.FIREBASE_CONFIG&&window.FIREBASE_CONFIG.apiKey?"지금은 서버에 연결하지 못해서 ":"")+"기록은 이 브라우저에 저장돼요. 같은 브라우저에서 닉네임·비밀번호로 이어 달릴 수 있어요. 다른 사이트 비밀번호는 쓰지 마세요.";
     localBoard();$("#boardNote").textContent="이 브라우저에서 등록한 운전자끼리 순위를 겨뤄요.";}
   syncNote();});
 async function getDoc(id){return Local.get(id);}
@@ -1141,7 +1153,7 @@ function save(){if(!S||!accId)return;S.updated=Date.now();
   else{const snap=JSON.parse(JSON.stringify(S));Local.put(accId,snap);Local.putBoard(accId,{...bd,updated:Date.now()});localBoard();}
   renderCoins();
 }
-function syncNote(e){const n=$("#syncNote");if(!n)return;n.textContent=CLOUD?(e?"저장 실패 · 연결을 확인해 주세요":"Firebase에 저장됨 · 다른 기기에서도 이어서"):"이 브라우저에 저장됨";}
+function syncNote(e){const n=$("#syncNote");if(!n)return;n.textContent=CLOUD&&e?"저장 실패 · 인터넷 연결을 확인해 주세요":"";}
 function localBoard(){const a=Local.read("sdrive-board");BOARD=Object.entries(a).map(([id,d])=>({id,...d}));renderBoard();renderOthers();}
 function subscribeCloudBoard(){const {F,db}=CLOUD;if(boardUnsub)boardUnsub();
   boardUnsub=F.onSnapshot(F.query(F.collection(db,"board"),F.limit(1000)),snap=>{
@@ -1215,7 +1227,9 @@ function renderAttend(){const a=S.attend,today=kstDate(),done=a.last===today;let
   for(let d=1;d<=7;d++){const got=d<=inCycle,next=!done&&d===inCycle+1;const it=document.createElement("div");it.className="aday"+(got?" got":"")+(next?" next":"")+(d===7?" big":"");
     it.innerHTML=`<div class="c"><span>+${REWARD(d)}</span></div><span>${d}일</span>`;box.append(it);}
   const btn=$("#attendBtn");btn.disabled=done;btn.textContent=done?"오늘 출석 완료 · 내일 또 와요":`오늘 출석하고 코인 +${REWARD(inCycle+1)}`;
-  const round=Math.floor(Math.max(0,a.count-(done?1:0))/7)+1;$("#attendInfo").textContent=`총 ${a.count}일 출석 · ${round}바퀴째 · 7일을 채우면 다시 1일차부터`;}
+  const round=Math.floor(Math.max(0,a.count-(done?1:0))/7)+1;$("#attendInfo").textContent=`총 ${a.count}일 출석 · ${round}바퀴째`;$("#attendDot").hidden=done;}
+$("#attendOpen").addEventListener("click",()=>{if(!S)return;renderAttend();openModal("#attendModal");});
+$("#attendClose").addEventListener("click",()=>closeModal("#attendModal"));
 $("#attendBtn").addEventListener("click",()=>{const a=S.attend,today=kstDate();if(a.last===today)return;const day=(a.count%7)+1;a.count++;a.last=today;S.coins+=REWARD(day);save();chime("arrive");toast(`${day}일차 출석! 코인 +${REWARD(day)}`);renderAttend();});
 
 /* ================= roulette with change limit ================= */
@@ -1465,7 +1479,7 @@ function wakeOff(){try{wake&&wake.release();}catch(e){}wake=null;}
 function show(id){for(const x of ["login","home","drive","arrive"])$("#"+x).hidden=(x!==id);}
 
 function route(){
-  $("#who").hidden=!S;if(S)$("#whoNick").textContent=S.nick;renderCoins();
+  $("#who").hidden=!S;if(S)$("#whoNick").textContent=S.nick;renderCoins();showBlocks();if(S)renderAttend();
   $("#book").hidden=!S;applySky();drawStamps();drawTrail();setHomePin();renderBoard();
   if(!S){show("login");clearVehicle();return;}
   if(S.trip){advance(Date.now());}
@@ -1496,7 +1510,7 @@ let rulesSeen=false;try{rulesSeen=localStorage.getItem("sdrive-rules-seen")==="1
 let lastFocus=null;
 function openModal(id){lastFocus=document.activeElement;const m=$(id);m.hidden=false;const sh=m.querySelector(".sheet");sh.setAttribute("tabindex","-1");sh.scrollTop=0;sh.focus({preventScroll:true});}
 function closeModal(id){$(id).hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
-function showBlocks(){$("#blocks").hidden=!rulesSeen;$("#rulesClose").hidden=!rulesSeen;}
+function showBlocks(){$("#blocks").hidden=!(rulesSeen||S);$("#manualBtn").hidden=!rulesSeen;$("#shareBtn").hidden=!rulesSeen;$("#attendOpen").hidden=!S;$("#rulesClose").hidden=!rulesSeen;}
 $("#rulesOk").addEventListener("click",()=>{rulesSeen=true;try{localStorage.setItem("sdrive-rules-seen","1");}catch(e){}closeModal("#rulesModal");showBlocks();toast("설명서는 위쪽 '설명서' 블록에서 언제든 다시 볼 수 있어요");});
 const car=$("#carousel"),slidesEl=[...car.querySelectorAll(".slide")];let cIdx=0;
 slidesEl.forEach((_,i)=>{const d=document.createElement("button");d.type="button";d.setAttribute("aria-label",`${i+1}쪽`);d.addEventListener("click",()=>goSlide(i));$("#cDots").append(d);});
@@ -1518,7 +1532,7 @@ $("#copyLink").addEventListener("click",()=>copyText(SHARE_URL,$("#shareLink")))
 $("#copyMsg").addEventListener("click",()=>copyText($("#shareMsg").value,$("#shareMsg")));
 $("#shareClose").addEventListener("click",()=>closeModal("#shareModal"));
 document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m&&(m.id!=="rulesModal"||rulesSeen))closeModal("#"+m.id);}));
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#shareModal").hidden)closeModal("#shareModal");else if(!$("#rulesModal").hidden&&rulesSeen)closeModal("#rulesModal");});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#attendModal").hidden){closeModal("#attendModal");return;}if(!$("#shareModal").hidden)closeModal("#shareModal");else if(!$("#rulesModal").hidden&&rulesSeen)closeModal("#rulesModal");});
 showBlocks();if(!rulesSeen)openModal("#rulesModal");
 
 buildMap();buildDeco();applySky();
