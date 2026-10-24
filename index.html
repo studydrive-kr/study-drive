@@ -83,13 +83,9 @@ input:focus,select:focus{border-color:var(--accent);outline:none}
 .note{font-size:12.5px;color:var(--muted);background:var(--card-2);border-radius:12px;padding:8px 12px;margin:0}
 
 /* top bar */
-.topbar{display:flex;flex-direction:column;align-items:stretch;gap:12px}
-.cover{margin:0;line-height:0;filter:drop-shadow(0 8px 0 #0a1430) drop-shadow(0 16px 18px rgba(10,20,48,.28))}
-.cover svg{display:block;width:100%;height:auto;max-height:200px}
-.topbar .tools{justify-content:flex-end}
-@media (max-width:600px){.topbar .tools{justify-content:center}}
-.logo{display:flex;align-items:center;gap:10px}
-.logo h1{font-size:30px;line-height:1.1;text-shadow:0 3px 0 color-mix(in srgb,var(--accent) 30%,transparent)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{margin:0;line-height:0;flex:0 0 auto}
+.logo svg{display:block;height:64px;width:auto;filter:drop-shadow(0 6px 8px rgba(10,20,48,.22))}
 .badge3d{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 12px;border-radius:12px;background:linear-gradient(#5fcb7f,var(--accent));color:#fff;font-family:var(--f-display);font-size:20px;box-shadow:0 5px 0 var(--accent-2),inset 0 2px 0 rgba(255,255,255,.4)}
 .tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .who{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 14px;font-size:14px;box-shadow:0 4px 0 var(--card-edge)}
@@ -270,6 +266,13 @@ input:focus,select:focus{border-color:var(--accent);outline:none}
 /* top blocks & modals */
 .blocks{display:flex;gap:8px}
 .blockbtn{position:relative}
+.notices{display:flex;flex-direction:column;gap:8px}
+.notice{background:var(--card-2);border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+.notice b{font-family:var(--f-display);font-weight:400;font-size:16px;display:block}
+.notice .d{font-size:12px;color:var(--muted)}
+.notice p{margin:4px 0 0;font-size:14px;white-space:pre-line}
+.notices .empty{text-align:center;color:var(--muted);font-size:14px;padding:16px 10px;border:2px dashed var(--line);border-radius:14px;margin:0}
+.fbsub{margin:6px 0 0;font-family:var(--f-display);font-weight:400;font-size:18px}
 #fbModal .tabs button{border:1px solid var(--line);border-radius:12px;padding:7px 14px;font-weight:700;font-size:14px;background:linear-gradient(var(--card),var(--card-2));box-shadow:0 4px 0 var(--card-edge)}
 #fbModal .tabs button[aria-checked="true"]{background:linear-gradient(#ff9ec7,#e86aa6);color:#fff;border-color:transparent;box-shadow:0 4px 0 #b8487d}
 .newdot{position:absolute;top:5px;right:6px;width:11px;height:11px;border-radius:50%;background:#e5533a;box-shadow:0 0 0 2px var(--card)}
@@ -357,7 +360,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
 .method summary{cursor:pointer;font-weight:700;color:var(--ink)}
 .method ul{padding-left:18px;margin:8px 0}
 .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;z-index:30;max-width:calc(100% - 32px);box-shadow:0 5px 0 rgba(0,0,0,.25)}
-@media (max-width:480px){.logo h1{font-size:22px}.stat .v{font-size:15px}.lic .body{grid-template-columns:70px minmax(0,1fr) 16px;gap:10px}}
+@media (max-width:480px){.logo svg{height:50px}.stat .v{font-size:15px}.lic .body{grid-template-columns:70px minmax(0,1fr) 16px;gap:10px}}
 </style>
 </head>
 <body>
@@ -546,57 +549,20 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
 
 <div class="app">
   <header class="topbar">
-    <h1 class="cover"><svg viewBox="0 0 1000 210" role="img" aria-label="StudyDrive · LET'S STUDY &amp; DRIVE · 공부 전국 드라이브">
-      <defs>
-        <linearGradient id="cvBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17306b"/><stop offset="1" stop-color="#0b1838"/></linearGradient>
-        <radialGradient id="cvGlow" cx=".6" cy=".45" r=".5"><stop offset="0" stop-color="#3b62c4" stop-opacity=".55"/><stop offset="1" stop-color="#3b62c4" stop-opacity="0"/></radialGradient>
-        <linearGradient id="cvTxt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff07a"/><stop offset=".38" stop-color="#ffd23f"/><stop offset=".62" stop-color="#a6e25a"/><stop offset="1" stop-color="#46c36d"/></linearGradient>
-        <linearGradient id="cvPage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#efe3c4"/></linearGradient>
-        <clipPath id="cvClip"><rect width="1000" height="210" rx="28"/></clipPath>
-      </defs>
-      <g clip-path="url(#cvClip)">
-        <rect width="1000" height="210" fill="url(#cvBg)"/>
-        <rect width="1000" height="210" fill="url(#cvGlow)"/>
-        <g fill="#cfe0ff"><circle cx="330" cy="30" r="1.6"/><circle cx="410" cy="18" r="1.2"/><circle cx="520" cy="26" r="1.8"/><circle cx="700" cy="16" r="1.3"/><circle cx="780" cy="34" r="1.6"/><circle cx="860" cy="20" r="1.2"/><circle cx="960" cy="40" r="1.6"/><circle cx="300" cy="120" r="1.2"/><circle cx="975" cy="120" r="1.3"/><circle cx="40" cy="30" r="1.4"/></g>
-        <g fill="#ffd23f"><path d="M372 52 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z"/><path d="M836 52 l2.4 6 6 2.4 -6 2.4 -2.4 6 -2.4 -6 -6 -2.4 6 -2.4z"/><path d="M280 40 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" opacity=".8"/></g>
-        <!-- road swoosh -->
-        <path d="M250 232 C420 150 640 222 1010 150" stroke="#2a3452" stroke-width="34" fill="none"/>
-        <path d="M250 232 C420 150 640 222 1010 150" stroke="#ffd23f" stroke-width="3" stroke-dasharray="16 14" fill="none"/>
-        <!-- open book with a road -->
-        <g transform="translate(0,6)">
-          <path d="M165 176 C125 160 75 160 30 172 L42 70 C85 58 132 60 165 76 C198 60 245 58 288 70 L300 172 C255 160 205 160 165 176Z" fill="#2f9e55"/>
-          <path d="M165 166 C128 150 82 150 42 160 L52 66 C90 56 132 58 165 72Z" fill="url(#cvPage)"/>
-          <path d="M165 166 C202 150 248 150 288 160 L278 66 C240 56 198 58 165 72Z" fill="url(#cvPage)"/>
-          <path d="M165 72 V166" stroke="#d8c79a" stroke-width="2"/>
-          <path d="M120 162 L210 162 L176 74 L154 74Z" fill="#4a5470"/>
-          <path d="M165 158 L165 80" stroke="#ffd23f" stroke-width="2.6" stroke-dasharray="7 6"/>
-          <path d="M60 140 C90 132 110 134 128 140 M214 140 C232 134 256 132 276 138" stroke="#9fd77a" stroke-width="10" stroke-linecap="round" fill="none" opacity=".8"/>
-          <use href="#s-tree" x="70" y="96" width="22" height="30"/><use href="#s-tree" x="96" y="104" width="18" height="24"/><use href="#s-tree" x="232" y="100" width="20" height="27"/><use href="#s-tree" x="256" y="92" width="22" height="30"/>
-          <g transform="translate(176,30)"><rect x="-1.6" y="0" width="3.2" height="46" rx="1.6" fill="#c9ced8"/>
-            <g transform="translate(1.6,2)"><rect width="30" height="20" fill="#fff"/><g fill="#1b2340"><rect width="7.5" height="5"/><rect x="15" width="7.5" height="5"/><rect x="7.5" y="5" width="7.5" height="5"/><rect x="22.5" y="5" width="7.5" height="5"/><rect y="10" width="7.5" height="5"/><rect x="15" y="10" width="7.5" height="5"/><rect x="7.5" y="15" width="7.5" height="5"/><rect x="22.5" y="15" width="7.5" height="5"/></g></g></g>
-          <use href="#v-car" x="134" y="124" width="62" height="40"/>
-          <g transform="translate(82,62)"><path d="M0 0 C-10 -11 -10 -24 0 -24 C10 -24 10 -11 0 0Z" fill="#e5533a"/><circle cy="-15" r="4" fill="#fff"/></g>
-          <g transform="translate(252,58)"><path d="M0 0 C-10 -11 -10 -24 0 -24 C10 -24 10 -11 0 0Z" fill="#3a8be8"/><circle cy="-15" r="4" fill="#fff"/></g>
-        </g>
-        <!-- title -->
-        <g font-family="Fredoka, Jua, sans-serif" font-weight="700" font-size="96" text-anchor="middle">
-          <text x="610" y="122" fill="#071027" stroke="#071027" stroke-width="16" stroke-linejoin="round">StudyDrive</text>
-          <text x="610" y="116" fill="#1f7a3c" stroke="#1f7a3c" stroke-width="12" stroke-linejoin="round">StudyDrive</text>
-          <text x="610" y="108" fill="#ffffff" stroke="#ffffff" stroke-width="9" stroke-linejoin="round">StudyDrive</text>
-          <text x="610" y="108" fill="url(#cvTxt)">StudyDrive</text>
-        </g>
-        <text x="610" y="146" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="19" letter-spacing="6" fill="#cfe0ff">LET'S STUDY &amp; DRIVE</text>
-        <g transform="translate(610,170)"><rect x="-92" y="-15" width="184" height="30" rx="15" fill="#ffd23f"/><rect x="-92" y="-15" width="184" height="30" rx="15" fill="none" stroke="#fff3b0" stroke-width="1.5" opacity=".7"/><text y="7" text-anchor="middle" font-family="Jua, sans-serif" font-size="18" fill="#10204a">공부 전국 드라이브</text></g>
-        <!-- grad cap + pencil -->
-        <g transform="translate(905,58)"><path d="M-26 6 V22 C-14 32 14 32 26 22 V6" fill="#0d1530" stroke="#8fa3d6" stroke-width="2"/><path d="M0 -16 L46 2 L0 20 L-46 2Z" fill="#141d3d" stroke="#8fa3d6" stroke-width="2" stroke-linejoin="round"/><path d="M0 2 L34 8 V30" stroke="#ffd23f" stroke-width="2.6" fill="none"/><circle cx="34" cy="32" r="4" fill="#ffd23f"/></g>
-        <g transform="translate(930,150) rotate(-38)"><rect x="-9" y="-48" width="18" height="70" rx="2" fill="#ffc93c"/><rect x="-9" y="-48" width="6" height="70" fill="#ffe08a"/><rect x="-9" y="-56" width="18" height="9" fill="#c9ced8"/><rect x="-9" y="-66" width="18" height="11" rx="4" fill="#ff9ec7"/><path d="M-9 22 L9 22 L0 42Z" fill="#f3d7a8"/><path d="M-3 35 L3 35 L0 42Z" fill="#2b2b2b"/></g>
+    <h1 class="logo"><svg viewBox="0 0 380 92" role="img" aria-label="StudyDrive">
+      <defs><linearGradient id="lgTxt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff07a"/><stop offset=".38" stop-color="#ffd23f"/><stop offset=".62" stop-color="#a6e25a"/><stop offset="1" stop-color="#46c36d"/></linearGradient></defs>
+      <g font-family="Fredoka, Jua, sans-serif" font-weight="700" font-size="66" text-anchor="middle">
+        <text x="190" y="72" textLength="352" lengthAdjust="spacingAndGlyphs" fill="#0b1838" stroke="#0b1838" stroke-width="14" stroke-linejoin="round">StudyDrive</text>
+        <text x="190" y="67" textLength="352" lengthAdjust="spacingAndGlyphs" fill="#1f7a3c" stroke="#1f7a3c" stroke-width="11" stroke-linejoin="round">StudyDrive</text>
+        <text x="190" y="61" textLength="352" lengthAdjust="spacingAndGlyphs" fill="#ffffff" stroke="#ffffff" stroke-width="8" stroke-linejoin="round">StudyDrive</text>
+        <text x="190" y="61" textLength="352" lengthAdjust="spacingAndGlyphs" fill="url(#lgTxt)">StudyDrive</text>
       </g>
     </svg></h1>
     <div class="tools">
       <div class="blocks" id="blocks" hidden>
         <button type="button" class="blockbtn" id="manualBtn" aria-label="운전 설명서 열기"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="6" y="3" width="18" height="22" rx="3" fill="#f6f0dc"/><rect x="4" y="2" width="18" height="22" rx="3" fill="#2f9e55"/><rect x="4" y="2" width="5" height="22" rx="2" fill="#23743d"/><rect x="11" y="7" width="8" height="2.4" rx="1.2" fill="#fff"/><rect x="11" y="11" width="6" height="2" rx="1" fill="#cfeedb"/><circle cx="6.5" cy="7" r="1" fill="#fff"/><circle cx="6.5" cy="12" r="1" fill="#fff"/><circle cx="6.5" cy="17" r="1" fill="#fff"/></svg><span>설명서</span></button>
         <button type="button" class="blockbtn" id="attendOpen" aria-label="매일 출석 열기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6" width="22" height="19" rx="4" fill="#ffffff" stroke="#d9a01e" stroke-width="1.6"/><rect x="3" y="6" width="22" height="6" rx="3" fill="#ffd457"/><rect x="8" y="3" width="3" height="6" rx="1.5" fill="#d9a01e"/><rect x="17" y="3" width="3" height="6" rx="1.5" fill="#d9a01e"/><circle cx="14" cy="18.5" r="4.6" fill="url(#gCoin)" stroke="#c98a0e" stroke-width="1"/></svg><span>출석</span><i class="newdot" id="attendDot" hidden></i></button>
-        <button type="button" class="blockbtn" id="fbOpen" aria-label="오류·문의·추가 요청 보내기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 7 Q4 3 8 3 H20 Q24 3 24 7 V15 Q24 19 20 19 H12 L7 24 V19 Q4 19 4 15Z" fill="#ff9ec7" stroke="#d9669a" stroke-width="1.6" stroke-linejoin="round"/><rect x="12.6" y="6.5" width="2.8" height="7" rx="1.4" fill="#fff"/><circle cx="14" cy="16" r="1.6" fill="#fff"/></svg><span>문의</span></button>
+        <button type="button" class="blockbtn" id="fbOpen" aria-label="공지 보기 · 문의하기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 11 H8 L19 5 V23 L8 17 H4 Q2.5 17 2.5 15.5 V12.5 Q2.5 11 4 11Z" fill="#ff9ec7" stroke="#d9669a" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 17 L9 24 H12 L10.5 17.5" fill="#ffd2e6" stroke="#d9669a" stroke-width="1.4" stroke-linejoin="round"/><path d="M22 10.5 Q24.5 14 22 17.5" stroke="#d9669a" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg><span>공지</span></button>
         <button type="button" class="blockbtn" id="shareBtn" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 14 L19 8 M9 14 L19 20" stroke="#3a74c8" stroke-width="2.6" stroke-linecap="round"/><circle cx="8" cy="14" r="4.2" fill="#6aaef7" stroke="#3a74c8" stroke-width="1.6"/><circle cx="20" cy="7.5" r="4.2" fill="#ffd457" stroke="#d9a01e" stroke-width="1.6"/><circle cx="20" cy="20.5" r="4.2" fill="#ff9ec7" stroke="#d9669a" stroke-width="1.6"/></svg><span>공유</span></button>
       </div>
       <span class="coinbadge" id="coinBadge" hidden><svg width="26" height="26"><use href="#s-coin"/></svg><span id="coinVal">5</span><span class="tag" id="coinTag">코인</span></span>
@@ -839,18 +805,20 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
 <div class="modal" id="fbModal" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
     <form class="pages" id="fbForm" novalidate>
-      <div class="mhead"><h2 id="fbTitle">오류·문의·추가 요청</h2><button type="button" class="pill" id="fbClose">닫기</button></div>
+      <div class="mhead"><h2 id="fbTitle">공지</h2><button type="button" class="pill" id="fbClose">닫기</button></div>
+      <div class="notices" id="noticeList"></div>
+      <h3 class="fbsub">문의하기</h3>
       <div class="tabs" role="radiogroup" aria-label="종류">
         <button type="button" role="radio" data-kind="오류" aria-checked="true" aria-selected="true">오류 신고</button>
         <button type="button" role="radio" data-kind="문의" aria-checked="false" aria-selected="false">문의</button>
         <button type="button" role="radio" data-kind="추가 요청" aria-checked="false" aria-selected="false">추가 요청</button>
       </div>
-      <div class="field"><label for="fbText">내용 (최대 100자)</label><textarea id="fbText" rows="4" maxlength="100" placeholder="예: 제주 가는 배 시간이 이상해요 / 지도에 우리 동네 이름이 안 보여요"></textarea>
+      <div class="field"><label for="fbText">내용 (최대 100자)</label><textarea id="fbText" rows="4" maxlength="100" placeholder="예: 지도에 우리 동네 이름이 안 보여요"></textarea>
         <span class="small muted num" id="fbCount" style="align-self:flex-end">0 / 100</span></div>
       <input type="checkbox" name="botcheck" id="fbBot" tabindex="-1" autocomplete="off" style="display:none">
       <p class="err" id="fbErr" role="alert"></p>
       <button class="btn big wide" type="submit" id="fbSend">보내기</button>
-      <p class="mfoot">보낸 글은 만든 사람에게 전달돼요. 닉네임(로그인한 경우)과 보낸 시각이 함께 전해지고, 개인정보는 적지 말아 주세요.</p>
+      <p class="mfoot">보낸 글은 만든 사람에게 전달돼요. 개인정보는 적지 말아 주세요.</p>
     </form>
   </div>
 </div>
@@ -1059,6 +1027,7 @@ function buildMap(){
   for(const r of REGIONS){const [x,y]=prj(r.la,r.lo);r.tx=el("text",{x:x.toFixed(1),y:y.toFixed(1),"font-family":"Jua, sans-serif"},G.labels);r.tx.textContent=r.n;r.tx.style.paintOrder="stroke";r.tx.style.stroke="var(--card)";r.tx.style.strokeLinejoin="round";}
   G.labels.style.display="none";
   G.stamps=el("g",{},svg);G.trail=el("g",{fill:"none","stroke-linecap":"round"},svg);G.others=el("g",{fill:"none","stroke-linecap":"round"},svg);G.route=el("g",{fill:"none","stroke-linecap":"round","stroke-linejoin":"round"},svg);
+  G.root=el("g",{},svg);[...svg.childNodes].forEach(n=>{if(n!==G.root&&n.nodeName!=="defs")G.root.append(n);});
 }
 function legPts(l){return [prj(l.from.la,l.from.lo),prj(l.to.la,l.to.lo)];}
 function curve(a,b,bend){const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1];const cx=mx-dy*bend,cy=my+dx*bend;return {d:`M${a[0].toFixed(1)} ${a[1].toFixed(1)} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`,c:[cx,cy]};}
@@ -1092,9 +1061,9 @@ const BB=[];
 function addBB(x,y,html,{w=40,h=40,cls="",scale=true,z=0,cap=2.2,mult=1}={}){const d=document.createElement("div");d.className="bb "+cls;d.style.width=w+"px";d.style.height=h+"px";d.innerHTML=html;bbLayer.append(d);const o={el:d,x,y,w,h,scale,z,cap,mult};BB.push(o);placeBB(o);return o;}
 function removeBB(o){if(!o)return;o.el.remove();const i=BB.indexOf(o);if(i>=0)BB.splice(i,1);}
 function placeBB(o){
-  const px=(o.x-VB.x)/VB.w,py=(o.y-VB.y)/VB.h,out=px<.015||px>.985||py<.045||py>.995;o.el.hidden=out;if(out){if(o===ME.o)placeMeBubble();return;}
+  const [rx,ry]=rotPt(o.x,o.y),px=(rx-VB.x)/VB.w,py=(ry-VB.y)/VB.h,out=px<.015||px>.985||py<.045||py>.995;o.el.hidden=out;if(out){if(o===ME.o)placeMeBubble();return;}
   const W=bbLayer.clientWidth||600,H=bbLayer.clientHeight||540,zoom=MAP.W/VB.w,s=o.scale?Math.min(o.cap,Math.max(.75,Math.sqrt(zoom)*.85))*(W/620):Math.max(.7,W/620)*Math.min(1.5,Math.max(1,Math.sqrt(zoom)*.8));
-  o.el.style.transform=`translate(${(px*W-o.w/2).toFixed(1)}px,${(py*H-o.h).toFixed(1)}px) translateZ(${1+o.z}px) rotateZ(${(-ROT).toFixed(2)}deg) rotateX(calc(-1 * var(--tilt))) scale(${(s*(o.mult||1)).toFixed(3)})`;
+  o.el.style.transform=`translate(${(px*W-o.w/2).toFixed(1)}px,${(py*H-o.h).toFixed(1)}px) translateZ(${1+o.z}px) rotateX(calc(-1 * var(--tilt))) scale(${(s*(o.mult||1)).toFixed(3)})`;
   if(o===ME.o)placeMeBubble();
 }
 let placeQueued=false;
@@ -1104,19 +1073,21 @@ function buildDeco(){for(const [x,y,k] of MAP.deco){addBB(x,y,`<svg width="${k==
 /* ---------- zoom & pan ---------- */
 let tweenId=0;const MINW=60;
 let ROT=0;const plane=$("#plane");
-function planeScale(){const a=ROT*Math.PI/180,c=Math.abs(Math.cos(a)),s=Math.abs(Math.sin(a)),h=VH*0.866;return Math.min(1/(c+h*s),h/(s+h*c));}
-function applyRot(r){ROT=((r%360)+360)%360;if(ROT>180)ROT-=360;plane.style.transform=`rotateX(var(--tilt)) rotateZ(${ROT.toFixed(2)}deg) scale(${planeScale().toFixed(3)})`;
+/* the board (frame) never turns; only the map drawn inside it rotates around the view centre */
+function rotRoot(){if(G.root)G.root.setAttribute("transform",Math.abs(ROT)<.01?"":`rotate(${ROT.toFixed(2)} ${(VB.x+VB.w/2).toFixed(1)} ${(VB.y+VB.h/2).toFixed(1)})`);}
+function rotPt(x,y){if(Math.abs(ROT)<.01)return [x,y];const a=ROT*Math.PI/180,c=Math.cos(a),s=Math.sin(a),cx=VB.x+VB.w/2,cy=VB.y+VB.h/2,dx=x-cx,dy=y-cy;return [cx+dx*c-dy*s,cy+dx*s+dy*c];}
+function applyRot(r){ROT=((r%360)+360)%360;if(ROT>180)ROT-=360;rotRoot();
   $("#rotNIcon").style.transform=`rotate(${ROT.toFixed(1)}deg)`;placeAll();if(S&&S.trip&&!$("#drive").hidden)renderDrive();}
 function rotTween(to){const from=ROT,d=((to-from+540)%360)-180,t0=performance.now(),dur=matchMedia("(prefers-reduced-motion: reduce)").matches?0:400;
   function st(now){const k=dur?Math.min(1,(now-t0)/dur):1;applyRot(from+d*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(st);}requestAnimationFrame(st);}
-function scr2map(dx,dy){const a=ROT*Math.PI/180,c=Math.cos(a),s=Math.sin(a),sc=planeScale(),wpx=plane.clientWidth*sc,hpx=plane.clientHeight*sc*Math.cos(30*Math.PI/180);
-  const mx=dx*c+dy*s,my=-dx*s+dy*c;return [mx*VB.w/wpx,my*VB.h/hpx];}
+function scr2map(dx,dy){const a=ROT*Math.PI/180,c=Math.cos(a),s=Math.sin(a),k=VB.w/(plane.clientWidth||600),px=dx*k,py=dy/Math.cos(30*Math.PI/180)*k;
+  return [px*c+py*s,-px*s+py*c];}
 function clampVB(v){const ar=VH;let w=Math.max(MINW,Math.min(MAP.W*1.15,v.w)),h=w*ar;
   let x=Math.max(-w*0.35,Math.min(MAP.W-w*0.65,v.x)),y=Math.max(-h*0.35,Math.min(MAP.H-h*0.65,v.y));return {x,y,w,h};}
 const LABEL_W=140;
 function updateLabels(){if(!G.labels)return;const show=VB.w<=LABEL_W;G.labels.style.display=show?"":"none";if(!show)return;const px=svg.clientWidth||600,fs=13*VB.w/px;
   for(const r of REGIONS){const got=S&&S.stamps&&S.stamps[r.key];r.tx.setAttribute("font-size",fs.toFixed(2));r.tx.setAttribute("dy",(fs*1.2+8).toFixed(2));r.tx.style.strokeWidth=(fs*.32).toFixed(2);r.tx.style.fill=got?"var(--stamp)":"var(--ink)";}}
-function applyVB(v){VB=clampVB(v);svg.setAttribute("viewBox",`${VB.x.toFixed(1)} ${VB.y.toFixed(1)} ${VB.w.toFixed(1)} ${VB.h.toFixed(1)}`);stage.classList.toggle("zoomed",VB.w<MAP.W*0.97);placeAll();updateLabels();}
+function applyVB(v){VB=clampVB(v);svg.setAttribute("viewBox",`${VB.x.toFixed(1)} ${VB.y.toFixed(1)} ${VB.w.toFixed(1)} ${VB.h.toFixed(1)}`);rotRoot();stage.classList.toggle("zoomed",VB.w<MAP.W*0.97);placeAll();updateLabels();}
 function setView(target,anim=true){
   const id=++tweenId,from={...VB},to=clampVB(target),t0=performance.now(),dur=anim&&!matchMedia("(prefers-reduced-motion: reduce)").matches?700:0;
   function step(now){if(id!==tweenId)return;const k=dur?Math.min(1,(now-t0)/dur):1,e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
@@ -1227,15 +1198,21 @@ const storeReady=fbLoaded.then(()=>{
   syncNote();});
 async function getDoc(id){return Local.get(id);}
 let lastBoardJSON="",lastPlayerJSON="",lastRowJSON="",rowBlocked=false,chain=Promise.resolve();
-function markLive(T){if(T)T.liveRef={acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0};}
-function liveOf(T){if(!T)return null;const r=n=>+n.toFixed(4),R=T.liveRef||{acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0};
+/* a snapshot other people see. `until` is when it stops counting as "달리는 중":
+   driving → refreshed at every hourly rest, so a closed window falls off within ~80 min at most;
+   window hidden (phone/tab closed) → right away; 졸음쉼터 → after 10 min. */
+function liveUntilOf(T,now){if(T.state==="shelter")return T.pauseReason==="phone"?now:now+10*60e3;
+  const left=Math.max(0,T.totalSec-T.acc),arrive=now+(left+Math.floor(left/3600)*300+(T.state==="rest"?Math.max(0,T.restEnd-now)/1000:0))*1000+120e3;
+  return Math.round(Math.min(arrive,now+80*60e3));}
+function markLive(T){if(!T)return;const now=Date.now();T.liveRef={acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0,until:liveUntilOf(T,now)};}
+function liveOf(T){if(!T)return null;const r=n=>+n.toFixed(4),R=T.liveRef||{acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0,until:liveUntilOf(T,Date.now())};
   return {legs:T.legs.map(l=>[r(l.from.la),r(l.from.lo),r(l.to.la),r(l.to.lo),l.kind,l.min]),totalSec:T.totalSec,...R};}
 function boardDoc(){return {nick:S.nick,trips:S.totals.trips,min:S.totals.min,km:S.totals.km,debt:S.coins<0,live:liveOf(S.trip)};}
 function save(){if(!S||!accId)return;S.updated=Date.now();
   const bd=boardDoc();
   if(CLOUD){const {F,db}=CLOUD,id=accId,data=JSON.stringify(S),pj=JSON.stringify({...S,updated:0});
     try{localStorage.setItem("sdrive-bak-"+id,data);}catch(e){}
-    const live={nick:bd.nick,trips:bd.trips,min:bd.min,km:bd.km,debt:bd.debt,liveOn:!!bd.live,live:bd.live?JSON.stringify(bd.live):null},lj=JSON.stringify(live);
+    const live={nick:bd.nick,trips:bd.trips,min:bd.min,km:bd.km,debt:bd.debt,liveUntil:bd.live?bd.live.until||0:0,live:bd.live?JSON.stringify(bd.live):null},lj=JSON.stringify(live);
     const row={n:bd.nick,t:bd.trips,m:bd.min,k:bd.km},rj=JSON.stringify(row);
     mergeBoard();
     chain=chain.then(()=>{if(pj===lastPlayerJSON)return;return F.setDoc(F.doc(db,"players",id),{data,updated:Date.now()}).then(()=>{lastPlayerJSON=pj;});})
@@ -1276,7 +1253,7 @@ async function loadBoard(force=false){const {F,db}=CLOUD;
   }catch(err){boardErr(err);}
   boardReadyResolve();mergeBoard();}
 function subscribeLive(){const {F,db}=CLOUD;if(liveUnsub)liveUnsub();
-  liveUnsub=F.onSnapshot(F.query(F.collection(db,"board"),F.where("liveOn","==",true),F.limit(100)),snap=>{
+  liveUnsub=F.onSnapshot(F.query(F.collection(db,"board"),F.where("liveUntil",">",Date.now()),F.orderBy("liveUntil","desc"),F.limit(15)),snap=>{
     LIVE=new Map(snap.docs.map(d=>[d.id,parseLiveDoc(d.id,d.data())]));liveReady=true;mergeBoard();},err=>{console.error(err);});}
 function subscribeCloudBoard(){loadBoard();subscribeLive();}
 $("#lbRefresh").addEventListener("click",()=>{if(!CLOUD){localBoard();return;}
@@ -1342,7 +1319,7 @@ $("#regForm").addEventListener("submit",async e=>{e.preventDefault();const err=$
 function upgrade(d){d.v=3;d.stamps=d.stamps||{};d.totals=d.totals||{min:0,km:0,trips:0};d.totals.trips=d.totals.trips||0;d.log=d.log||[];
   if(typeof d.coins!=="number")d.coins=5;d.attend=d.attend||{count:0,last:""};d.pick=d.pick||{prov:null,dest:null,changes:0,lockUntil:0};d.trip=d.trip||null;if(d.trip){d.trip.tolls=d.trip.tolls||[];d.trip.tollsPaid=d.trip.tollsPaid||0;d.trip.bonus=d.trip.bonus||3;d.trip.stops=d.trip.stops||[];}return d;}
 function afterLogin(msg){if(!CLOUD){try{localStorage.setItem("sdrive-session",accId);}catch(e){}}$("#lpw").value="";lastBoardJSON="";lastPlayerJSON="";lastRowJSON="";toast(msg);save();restorePick();route();}
-$("#logoutBtn").addEventListener("click",async()=>{if(S&&S.trip&&S.trip.state==="drive"){const T=S.trip;T.acc=studied(Date.now());T.state="shelter";T.pausedAt=Date.now();markLive(T);save();}
+$("#logoutBtn").addEventListener("click",async()=>{if(S&&S.trip){const T=S.trip;if(T.state==="drive"){T.acc=studied(Date.now());T.state="shelter";T.pausedAt=Date.now();}markLive(T);T.liveRef.until=Date.now();save();}
   if(CLOUD){try{await chain;await CLOUD.A.signOut(CLOUD.auth);}catch(e){}}
   try{localStorage.removeItem("sdrive-session");}catch(e){}S=null;accId=null;clearVehicle();setDestPin(null);setTripPins(null);G.route.innerHTML="";routePts=[];wheelItems=[];dest=null;viewAll();route();});
 
@@ -1461,7 +1438,7 @@ function payTolls(now,live){const T=S.trip;let paid=0;while(T.tollsPaid<T.tolls.
 function advance(now){const T=S.trip;if(!T)return;let changed=false;
   for(let g=0;g<60;g++){
     if(T.state==="drive"){const st=studied(now),nx=T.stops[T.restsTaken];
-      if(nx&&st>=nx.at&&nx.at<T.totalSec){const reach=T.seg+(nx.at-T.acc)*1000;T.acc=nx.at;T.state="rest";T.restEnd=reach+300000;changed=true;if(now-reach<3000)chime("rest");continue;}
+      if(nx&&st>=nx.at&&nx.at<T.totalSec){const reach=T.seg+(nx.at-T.acc)*1000;T.acc=nx.at;T.state="rest";T.restEnd=reach+300000;markLive(T);changed=true;if(now-reach<3000)chime("rest");continue;}
       if(st>=T.totalSec){T.acc=T.totalSec;payTolls(now,false);arriveNow();return;}break;}
     else if(T.state==="rest"){if(now>=T.restEnd){T.restsTaken++;T.state="drive";T.seg=T.restEnd;changed=true;if(now-T.restEnd<3000)chime("go");continue;}break;}
     else break;}
@@ -1530,7 +1507,7 @@ function estLive(L,now){let st=L.acc,t;if(L.state==="shelter")return {st,state:"
     rem-=nx-st;st=nx;if(rem<300)return {st,state:"rest"};rem-=300;}
   return {st:Math.min(st,L.totalSec),state:"drive"};}
 function isLive(b,now=Date.now()){const L=b.live;if(!L||!L.legs||!L.legs.length)return false;
-  if(estLive(L,now).st>=L.totalSec)return false;if(L.state==="shelter"&&now-L.pausedAt>2*3600e3)return false;if(now-(b.liveAt||b.updated||0)>2*DAY)return false;return true;}
+  if(estLive(L,now).st>=L.totalSec)return false;if(L.until&&now>L.until)return false;if(L.state==="shelter"&&now-L.pausedAt>2*3600e3)return false;if(now-(b.liveAt||b.updated||0)>2*DAY)return false;return true;}
 function renderBoard(){
   const f=lbField,list=BOARD.filter(b=>b&&b.nick).map(b=>({...b,v:b[f]||0})).sort((a,b)=>b.v-a.v||(a.updated||0)-(b.updated||0));
   let rank=0,prev=null;list.forEach((b,i)=>{if(b.v!==prev){rank=i+1;prev=b.v;}b.rank=rank;});
@@ -1552,7 +1529,7 @@ function renderBoard(){
 const OTHERS=new Map();
 function renderOthers(){
   const now=Date.now(),seen=new Set();let live=0;
-  for(const b of BOARD){if(!b||b.id===accId||!isLive(b,now))continue;live++;if(live>40)break;
+  for(const b of BOARD){if(!b||b.id===accId||!isLive(b,now))continue;live++;if(live>15)break;
     const L=b.live,T={legs:L.legs.map(a=>({from:{la:a[0],lo:a[1]},to:{la:a[2],lo:a[3]},kind:a[4],min:a[5]})),totalSec:L.totalSec};
     const E=estLive(L,now),st=E.st,p=posAt(T,st);
     let h=OTHERS.get(b.id);if(!h){h={o:null,key:null};OTHERS.set(b.id,h);}seen.add(b.id);
@@ -1646,7 +1623,12 @@ function closeModal(id){$(id).hidden=true;if(lastFocus&&lastFocus.focus)lastFocu
 let fbKind="오류";
 document.querySelectorAll("#fbModal [data-kind]").forEach(b=>b.addEventListener("click",()=>{fbKind=b.dataset.kind;document.querySelectorAll("#fbModal [data-kind]").forEach(x=>{x.setAttribute("aria-checked",x===b);x.setAttribute("aria-selected",x===b);});}));
 $("#fbText").addEventListener("input",()=>{$("#fbCount").textContent=`${[...$("#fbText").value].length} / 100`;});
-$("#fbOpen").addEventListener("click",()=>{$("#fbErr").textContent="";openModal("#fbModal");setTimeout(()=>$("#fbText").focus(),50);});
+/* 공지: 새 공지는 이 목록 맨 앞에 {date:"2026-10-25",title:"제목",body:"내용"} 으로 넣으면 돼요 */
+const NOTICES=[];
+function renderNotices(){const box=$("#noticeList");box.innerHTML="";
+  if(!NOTICES.length){const p=document.createElement("p");p.className="empty";p.textContent="아직 올라온 공지가 없어요.";box.append(p);return;}
+  for(const n of NOTICES){const d=document.createElement("div");d.className="notice";d.innerHTML=`<b>${esc(n.title)}</b><span class="d">${esc(n.date||"")}</span>${n.body?`<p>${esc(n.body)}</p>`:""}`;box.append(d);}}
+$("#fbOpen").addEventListener("click",()=>{$("#fbErr").textContent="";renderNotices();openModal("#fbModal");});
 $("#fbClose").addEventListener("click",()=>closeModal("#fbModal"));
 $("#fbForm").addEventListener("submit",async e=>{e.preventDefault();const err=$("#fbErr");err.textContent="";
   const text=$("#fbText").value.trim().slice(0,100);
@@ -1654,13 +1636,13 @@ $("#fbForm").addEventListener("submit",async e=>{e.preventDefault();const err=$(
   if($("#fbBot").checked)return;
   let last=0;try{last=+localStorage.getItem("sdrive-fb-last")||0;}catch(x){}
   if(Date.now()-last<60000){err.textContent="방금 보냈어요. 1분 뒤에 다시 보낼 수 있어요.";return;}
-  const key=(window.WEB3FORMS_KEY||"").trim(),nick=S?S.nick:"비회원",at=new Date().toLocaleString("ko-KR",{timeZone:"Asia/Seoul"});
+  const key=(window.WEB3FORMS_KEY||"").trim();
   if(!key&&!CLOUD){err.textContent="아직 문의를 받을 곳이 설정되지 않았어요.";return;}
   const btn=$("#fbSend");btn.disabled=true;btn.textContent="보내는 중…";let ok=false;
   if(key){try{const fd=new FormData();fd.append("access_key",key);fd.append("subject",`[StudyDrive] ${fbKind}`);fd.append("from_name","StudyDrive");
-      fd.append("종류",fbKind);fd.append("내용",text);fd.append("닉네임",nick);fd.append("보낸 시각",at);fd.append("페이지",location.href);
+      fd.append("종류",fbKind);fd.append("내용",text);
       const r=await fetch("https://api.web3forms.com/submit",{method:"POST",body:fd,headers:{Accept:"application/json"}});const j=await r.json().catch(()=>({}));ok=r.ok&&j.success!==false;}catch(x){console.error(x);}}
-  if(CLOUD){try{const {F,db}=CLOUD;await F.addDoc(F.collection(db,"feedback"),{kind:fbKind,text,nick,at,ts:Date.now(),page:location.href});ok=true;}catch(x){console.error(x);}}
+  if(CLOUD){try{const {F,db}=CLOUD;await F.addDoc(F.collection(db,"feedback"),{kind:fbKind,text,ts:Date.now()});ok=true;}catch(x){console.error(x);}}
   btn.disabled=false;btn.textContent="보내기";
   if(!ok){err.textContent="보내지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.";return;}
   try{localStorage.setItem("sdrive-fb-last",String(Date.now()));}catch(x){}
