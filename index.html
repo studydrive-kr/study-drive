@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>전국 공부 드라이브</title>
+<title>StudyDrive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Jua&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
 <style>
 /* Layout: clay diorama of Korea (left) + control panel (right); leaderboard podium and stamp passport below. Everything is built as raised clay blocks.
    Day/night is the page's own sky, switched by the nationwide average sunrise/sunset. */
@@ -83,7 +83,11 @@ input:focus,select:focus{border-color:var(--accent);outline:none}
 .note{font-size:12.5px;color:var(--muted);background:var(--card-2);border-radius:12px;padding:8px 12px;margin:0}
 
 /* top bar */
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.topbar{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+.cover{margin:0;line-height:0;filter:drop-shadow(0 8px 0 #0a1430) drop-shadow(0 16px 18px rgba(10,20,48,.28))}
+.cover svg{display:block;width:100%;height:auto;max-height:200px}
+.topbar .tools{justify-content:flex-end}
+@media (max-width:600px){.topbar .tools{justify-content:center}}
 .logo{display:flex;align-items:center;gap:10px}
 .logo h1{font-size:30px;line-height:1.1;text-shadow:0 3px 0 color-mix(in srgb,var(--accent) 30%,transparent)}
 .badge3d{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 12px;border-radius:12px;background:linear-gradient(#5fcb7f,var(--accent));color:#fff;font-family:var(--f-display);font-size:20px;box-shadow:0 5px 0 var(--accent-2),inset 0 2px 0 rgba(255,255,255,.4)}
@@ -124,7 +128,7 @@ input:focus,select:focus{border-color:var(--accent);outline:none}
 .veh.ghost{opacity:.88}
 @keyframes bob{from{transform:translateY(0)}to{transform:translateY(-3px)}}
 @keyframes blink{50%{opacity:.55}}
-.bubble{position:absolute;left:62%;bottom:78%;font-family:var(--f-display);font-size:14px;background:#fff;color:#2b3a24;border-radius:10px;padding:2px 8px;box-shadow:0 3px 0 #c9d6bf;white-space:nowrap}
+.bubble{position:absolute;left:0;top:0;z-index:4;pointer-events:none;transform:translate(-50%,calc(-100% - 4px));font-family:var(--f-display);font-size:14px;background:#fff;color:#2b3a24;border-radius:10px;padding:2px 8px;box-shadow:0 3px 0 #c9d6bf;white-space:nowrap}
 .bubble.coin{background:#ffe08a;color:#4a3200;box-shadow:0 3px 0 #d9a21c}
 .mapctl{position:absolute;left:14px;bottom:4px;display:flex;gap:8px;flex-wrap:wrap;z-index:3}
 .zoomctl{position:absolute;right:14px;top:16px;display:flex;flex-direction:column;gap:8px;z-index:3}
@@ -266,6 +270,8 @@ input:focus,select:focus{border-color:var(--accent);outline:none}
 /* top blocks & modals */
 .blocks{display:flex;gap:8px}
 .blockbtn{position:relative}
+#fbModal .tabs button{border:1px solid var(--line);border-radius:12px;padding:7px 14px;font-weight:700;font-size:14px;background:linear-gradient(var(--card),var(--card-2));box-shadow:0 4px 0 var(--card-edge)}
+#fbModal .tabs button[aria-checked="true"]{background:linear-gradient(#ff9ec7,#e86aa6);color:#fff;border-color:transparent;box-shadow:0 4px 0 #b8487d}
 .newdot{position:absolute;top:5px;right:6px;width:11px;height:11px;border-radius:50%;background:#e5533a;box-shadow:0 0 0 2px var(--card)}
 #attendModal .attend .aday .c{max-width:46px}
 .blockbtn{width:58px;height:58px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(var(--card),var(--card-2));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
@@ -540,11 +546,57 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
 
 <div class="app">
   <header class="topbar">
-    <div class="logo"><span class="badge3d">공부</span><h1>전국 공부 드라이브</h1></div>
+    <h1 class="cover"><svg viewBox="0 0 1000 210" role="img" aria-label="StudyDrive · LET'S STUDY &amp; DRIVE · 공부 전국 드라이브">
+      <defs>
+        <linearGradient id="cvBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17306b"/><stop offset="1" stop-color="#0b1838"/></linearGradient>
+        <radialGradient id="cvGlow" cx=".6" cy=".45" r=".5"><stop offset="0" stop-color="#3b62c4" stop-opacity=".55"/><stop offset="1" stop-color="#3b62c4" stop-opacity="0"/></radialGradient>
+        <linearGradient id="cvTxt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff07a"/><stop offset=".38" stop-color="#ffd23f"/><stop offset=".62" stop-color="#a6e25a"/><stop offset="1" stop-color="#46c36d"/></linearGradient>
+        <linearGradient id="cvPage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#efe3c4"/></linearGradient>
+        <clipPath id="cvClip"><rect width="1000" height="210" rx="28"/></clipPath>
+      </defs>
+      <g clip-path="url(#cvClip)">
+        <rect width="1000" height="210" fill="url(#cvBg)"/>
+        <rect width="1000" height="210" fill="url(#cvGlow)"/>
+        <g fill="#cfe0ff"><circle cx="330" cy="30" r="1.6"/><circle cx="410" cy="18" r="1.2"/><circle cx="520" cy="26" r="1.8"/><circle cx="700" cy="16" r="1.3"/><circle cx="780" cy="34" r="1.6"/><circle cx="860" cy="20" r="1.2"/><circle cx="960" cy="40" r="1.6"/><circle cx="300" cy="120" r="1.2"/><circle cx="975" cy="120" r="1.3"/><circle cx="40" cy="30" r="1.4"/></g>
+        <g fill="#ffd23f"><path d="M372 52 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z"/><path d="M836 52 l2.4 6 6 2.4 -6 2.4 -2.4 6 -2.4 -6 -6 -2.4 6 -2.4z"/><path d="M280 40 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" opacity=".8"/></g>
+        <!-- road swoosh -->
+        <path d="M250 232 C420 150 640 222 1010 150" stroke="#2a3452" stroke-width="34" fill="none"/>
+        <path d="M250 232 C420 150 640 222 1010 150" stroke="#ffd23f" stroke-width="3" stroke-dasharray="16 14" fill="none"/>
+        <!-- open book with a road -->
+        <g transform="translate(0,6)">
+          <path d="M165 176 C125 160 75 160 30 172 L42 70 C85 58 132 60 165 76 C198 60 245 58 288 70 L300 172 C255 160 205 160 165 176Z" fill="#2f9e55"/>
+          <path d="M165 166 C128 150 82 150 42 160 L52 66 C90 56 132 58 165 72Z" fill="url(#cvPage)"/>
+          <path d="M165 166 C202 150 248 150 288 160 L278 66 C240 56 198 58 165 72Z" fill="url(#cvPage)"/>
+          <path d="M165 72 V166" stroke="#d8c79a" stroke-width="2"/>
+          <path d="M120 162 L210 162 L176 74 L154 74Z" fill="#4a5470"/>
+          <path d="M165 158 L165 80" stroke="#ffd23f" stroke-width="2.6" stroke-dasharray="7 6"/>
+          <path d="M60 140 C90 132 110 134 128 140 M214 140 C232 134 256 132 276 138" stroke="#9fd77a" stroke-width="10" stroke-linecap="round" fill="none" opacity=".8"/>
+          <use href="#s-tree" x="70" y="96" width="22" height="30"/><use href="#s-tree" x="96" y="104" width="18" height="24"/><use href="#s-tree" x="232" y="100" width="20" height="27"/><use href="#s-tree" x="256" y="92" width="22" height="30"/>
+          <g transform="translate(176,30)"><rect x="-1.6" y="0" width="3.2" height="46" rx="1.6" fill="#c9ced8"/>
+            <g transform="translate(1.6,2)"><rect width="30" height="20" fill="#fff"/><g fill="#1b2340"><rect width="7.5" height="5"/><rect x="15" width="7.5" height="5"/><rect x="7.5" y="5" width="7.5" height="5"/><rect x="22.5" y="5" width="7.5" height="5"/><rect y="10" width="7.5" height="5"/><rect x="15" y="10" width="7.5" height="5"/><rect x="7.5" y="15" width="7.5" height="5"/><rect x="22.5" y="15" width="7.5" height="5"/></g></g></g>
+          <use href="#v-car" x="134" y="124" width="62" height="40"/>
+          <g transform="translate(82,62)"><path d="M0 0 C-10 -11 -10 -24 0 -24 C10 -24 10 -11 0 0Z" fill="#e5533a"/><circle cy="-15" r="4" fill="#fff"/></g>
+          <g transform="translate(252,58)"><path d="M0 0 C-10 -11 -10 -24 0 -24 C10 -24 10 -11 0 0Z" fill="#3a8be8"/><circle cy="-15" r="4" fill="#fff"/></g>
+        </g>
+        <!-- title -->
+        <g font-family="Fredoka, Jua, sans-serif" font-weight="700" font-size="96" text-anchor="middle">
+          <text x="610" y="122" fill="#071027" stroke="#071027" stroke-width="16" stroke-linejoin="round">StudyDrive</text>
+          <text x="610" y="116" fill="#1f7a3c" stroke="#1f7a3c" stroke-width="12" stroke-linejoin="round">StudyDrive</text>
+          <text x="610" y="108" fill="#ffffff" stroke="#ffffff" stroke-width="9" stroke-linejoin="round">StudyDrive</text>
+          <text x="610" y="108" fill="url(#cvTxt)">StudyDrive</text>
+        </g>
+        <text x="610" y="146" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="19" letter-spacing="6" fill="#cfe0ff">LET'S STUDY &amp; DRIVE</text>
+        <g transform="translate(610,170)"><rect x="-92" y="-15" width="184" height="30" rx="15" fill="#ffd23f"/><rect x="-92" y="-15" width="184" height="30" rx="15" fill="none" stroke="#fff3b0" stroke-width="1.5" opacity=".7"/><text y="7" text-anchor="middle" font-family="Jua, sans-serif" font-size="18" fill="#10204a">공부 전국 드라이브</text></g>
+        <!-- grad cap + pencil -->
+        <g transform="translate(905,58)"><path d="M-26 6 V22 C-14 32 14 32 26 22 V6" fill="#0d1530" stroke="#8fa3d6" stroke-width="2"/><path d="M0 -16 L46 2 L0 20 L-46 2Z" fill="#141d3d" stroke="#8fa3d6" stroke-width="2" stroke-linejoin="round"/><path d="M0 2 L34 8 V30" stroke="#ffd23f" stroke-width="2.6" fill="none"/><circle cx="34" cy="32" r="4" fill="#ffd23f"/></g>
+        <g transform="translate(930,150) rotate(-38)"><rect x="-9" y="-48" width="18" height="70" rx="2" fill="#ffc93c"/><rect x="-9" y="-48" width="6" height="70" fill="#ffe08a"/><rect x="-9" y="-56" width="18" height="9" fill="#c9ced8"/><rect x="-9" y="-66" width="18" height="11" rx="4" fill="#ff9ec7"/><path d="M-9 22 L9 22 L0 42Z" fill="#f3d7a8"/><path d="M-3 35 L3 35 L0 42Z" fill="#2b2b2b"/></g>
+      </g>
+    </svg></h1>
     <div class="tools">
       <div class="blocks" id="blocks" hidden>
         <button type="button" class="blockbtn" id="manualBtn" aria-label="운전 설명서 열기"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="6" y="3" width="18" height="22" rx="3" fill="#f6f0dc"/><rect x="4" y="2" width="18" height="22" rx="3" fill="#2f9e55"/><rect x="4" y="2" width="5" height="22" rx="2" fill="#23743d"/><rect x="11" y="7" width="8" height="2.4" rx="1.2" fill="#fff"/><rect x="11" y="11" width="6" height="2" rx="1" fill="#cfeedb"/><circle cx="6.5" cy="7" r="1" fill="#fff"/><circle cx="6.5" cy="12" r="1" fill="#fff"/><circle cx="6.5" cy="17" r="1" fill="#fff"/></svg><span>설명서</span></button>
         <button type="button" class="blockbtn" id="attendOpen" aria-label="매일 출석 열기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6" width="22" height="19" rx="4" fill="#ffffff" stroke="#d9a01e" stroke-width="1.6"/><rect x="3" y="6" width="22" height="6" rx="3" fill="#ffd457"/><rect x="8" y="3" width="3" height="6" rx="1.5" fill="#d9a01e"/><rect x="17" y="3" width="3" height="6" rx="1.5" fill="#d9a01e"/><circle cx="14" cy="18.5" r="4.6" fill="url(#gCoin)" stroke="#c98a0e" stroke-width="1"/></svg><span>출석</span><i class="newdot" id="attendDot" hidden></i></button>
+        <button type="button" class="blockbtn" id="fbOpen" aria-label="오류·문의·추가 요청 보내기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 7 Q4 3 8 3 H20 Q24 3 24 7 V15 Q24 19 20 19 H12 L7 24 V19 Q4 19 4 15Z" fill="#ff9ec7" stroke="#d9669a" stroke-width="1.6" stroke-linejoin="round"/><rect x="12.6" y="6.5" width="2.8" height="7" rx="1.4" fill="#fff"/><circle cx="14" cy="16" r="1.6" fill="#fff"/></svg><span>문의</span></button>
         <button type="button" class="blockbtn" id="shareBtn" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 14 L19 8 M9 14 L19 20" stroke="#3a74c8" stroke-width="2.6" stroke-linecap="round"/><circle cx="8" cy="14" r="4.2" fill="#6aaef7" stroke="#3a74c8" stroke-width="1.6"/><circle cx="20" cy="7.5" r="4.2" fill="#ffd457" stroke="#d9a01e" stroke-width="1.6"/><circle cx="20" cy="20.5" r="4.2" fill="#ff9ec7" stroke="#d9669a" stroke-width="1.6"/></svg><span>공유</span></button>
       </div>
       <span class="coinbadge" id="coinBadge" hidden><svg width="26" height="26"><use href="#s-coin"/></svg><span id="coinVal">5</span><span class="tag" id="coinTag">코인</span></span>
@@ -564,6 +616,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
       <div class="maphint" id="maphint">드래그로 이동 · 휠·두 손가락으로 확대 · Shift+드래그나 비틀기로 회전</div>
       <div class="mapctl"><button class="pill" type="button" id="viewAll">전국 보기</button><button class="pill" type="button" id="viewRoute" hidden>경로 보기</button><span class="pill" id="liveCount" hidden></span></div>
       <div class="skytag" id="skyTag"></div>
+      <span class="bubble" id="meBubble" hidden></span>
     </section>
 
     <aside class="side">
@@ -695,6 +748,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
         <button type="button" role="tab" data-f="min" aria-selected="false">누적 공부 시간</button>
         <button type="button" role="tab" data-f="km" aria-selected="false">누적 이동 거리</button>
       </div>
+      <button type="button" class="pill" id="lbRefresh" aria-label="순위표 새로고침">새로고침</button>
     </div>
     <div class="podium" id="podium"></div>
     <ol class="lblist" id="lblist"></ol>
@@ -727,7 +781,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
   <div class="sheet manual" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
     <div class="spine" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="pages">
-      <div class="mhead"><span class="badge3d" style="height:30px;font-size:16px">설명서</span><h2 id="rulesTitle">공부 드라이브 운전 설명서</h2><button type="button" class="pill" id="rulesClose" hidden>닫기</button></div>
+      <div class="mhead"><span class="badge3d" style="height:30px;font-size:16px">설명서</span><h2 id="rulesTitle">StudyDrive 운전 설명서</h2><button type="button" class="pill" id="rulesClose" hidden>닫기</button></div>
       <div class="carousel" id="carousel" tabindex="0" aria-label="설명서 쪽 넘기기">
         <section class="slide" aria-roledescription="쪽" aria-label="1 / 8 면허 발급">
           <svg class="art" viewBox="0 0 220 130" role="img" aria-label="면허 발급 그림"><rect x="0" y="0" width="220" height="130" rx="16" fill="#9fe6da"/><path d="M10 112 q8 -6 16 0 t16 0 M150 22 q8 -6 16 0 t16 0" stroke="#d6f6f0" stroke-width="2.4" fill="none" stroke-linecap="round"/><g transform="translate(46,22) rotate(-6 64 42)"><rect x="4" y="6" width="128" height="80" rx="12" fill="#9fa5aa"/><rect x="0" y="0" width="128" height="80" rx="12" fill="#cdeaf8"/><rect x="0" y="0" width="128" height="15" rx="8" fill="#c9cdd1"/><rect x="0" y="66" width="128" height="14" rx="6" fill="#c3c8cd"/><rect x="10" y="22" width="30" height="38" rx="3" fill="#eef0f2"/><svg x="10" y="24" width="30" height="36" viewBox="0 0 92 100"><use href="#s-person"/></svg><rect x="48" y="24" width="56" height="8" rx="4" fill="#fff"/><rect x="48" y="36" width="20" height="6" rx="3" fill="#2a2f34"/><rect x="72" y="36" width="34" height="6" rx="3" fill="#aeb4ba"/><rect x="48" y="47" width="58" height="6" rx="3" fill="#aeb4ba"/><rect x="112" y="22" width="8" height="38" rx="2" fill="#3a3f44"/><text x="64" y="11" text-anchor="middle" font-family="Jua,sans-serif" font-size="9" fill="#3a434c">공부 운전면허증</text></g></svg>
@@ -782,6 +836,24 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
     </div>
   </div>
 </div>
+<div class="modal" id="fbModal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+    <form class="pages" id="fbForm" novalidate>
+      <div class="mhead"><h2 id="fbTitle">오류·문의·추가 요청</h2><button type="button" class="pill" id="fbClose">닫기</button></div>
+      <div class="tabs" role="radiogroup" aria-label="종류">
+        <button type="button" role="radio" data-kind="오류" aria-checked="true" aria-selected="true">오류 신고</button>
+        <button type="button" role="radio" data-kind="문의" aria-checked="false" aria-selected="false">문의</button>
+        <button type="button" role="radio" data-kind="추가 요청" aria-checked="false" aria-selected="false">추가 요청</button>
+      </div>
+      <div class="field"><label for="fbText">내용 (최대 100자)</label><textarea id="fbText" rows="4" maxlength="100" placeholder="예: 제주 가는 배 시간이 이상해요 / 지도에 우리 동네 이름이 안 보여요"></textarea>
+        <span class="small muted num" id="fbCount" style="align-self:flex-end">0 / 100</span></div>
+      <input type="checkbox" name="botcheck" id="fbBot" tabindex="-1" autocomplete="off" style="display:none">
+      <p class="err" id="fbErr" role="alert"></p>
+      <button class="btn big wide" type="submit" id="fbSend">보내기</button>
+      <p class="mfoot">보낸 글은 만든 사람에게 전달돼요. 닉네임(로그인한 경우)과 보낸 시각이 함께 전해지고, 개인정보는 적지 말아 주세요.</p>
+    </form>
+  </div>
+</div>
 <div class="modal" id="shareModal" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
     <div class="pages">
@@ -809,6 +881,9 @@ window.FIREBASE_CONFIG = {
   messagingSenderId: "493798237687",
   appId: "1:493798237687:web:ec81e9c64402db12b87af2"
 };
+/* 문의 메일 받기: web3forms.com에서 받을 이메일을 넣고 받은 Access Key를 아래 따옴표 안에 붙여넣으세요.
+   비워 두면 문의는 Firebase(Firestore)의 feedback 목록에만 저장돼요. */
+window.WEB3FORMS_KEY = "41e48049-c24a-4cd4-9c72-85ea80ff9e23";
 /* 예시
 window.FIREBASE_CONFIG = {
   apiKey: "AIza...",
@@ -994,11 +1069,11 @@ function drawRoute(legs,doneSec,totalSec){
   G.route.innerHTML="";if(!legs||!legs.length)return;
   const scale=totalSec?totalSec/60/legs.reduce((s,l)=>s+l.min,0):1;let t0=0;
   for(const l of legs){const [a,b]=legPts(l),cv=curve(a,b,BEND[l.kind]);const sea=l.kind==="ship",air=l.kind==="plane";
-    el("path",{d:cv.d,stroke:"rgba(0,0,0,.25)","stroke-width":9,"vector-effect":"non-scaling-stroke",transform:"translate(0,3)"},G.route);
-    el("path",{d:cv.d,stroke:sea?"#2f6fd6":air?"#e5533a":"#ffffff","stroke-width":7,"vector-effect":"non-scaling-stroke"},G.route);
-    el("path",{d:cv.d,stroke:sea?"#bfe3ff":air?"#ffd8cc":"#f0a81e","stroke-width":3,"stroke-dasharray":sea?"2 7":air?"10 8":"10 9","vector-effect":"non-scaling-stroke"},G.route);
+    el("path",{d:cv.d,stroke:"rgba(0,0,0,.25)","stroke-width":6,"vector-effect":"non-scaling-stroke",transform:"translate(0,2)"},G.route);
+    el("path",{d:cv.d,stroke:sea?"#2f6fd6":air?"#e5533a":"#ffffff","stroke-width":4.6,"vector-effect":"non-scaling-stroke"},G.route);
+    el("path",{d:cv.d,stroke:sea?"#bfe3ff":air?"#ffd8cc":"#f0a81e","stroke-width":2,"stroke-dasharray":sea?"2 6":air?"8 7":"8 8","vector-effect":"non-scaling-stroke"},G.route);
     if(doneSec!=null){const ls=l.min*60*scale,f=Math.max(0,Math.min(1,(doneSec-t0)/ls));
-      if(f>0){const pts=[];for(let k=0;k<=24;k++)pts.push(qpt(a,cv.c,b,f*k/24));el("path",{d:"M"+pts.map(p=>p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" L"),stroke:"var(--gold)","stroke-width":7,"vector-effect":"non-scaling-stroke"},G.route);}
+      if(f>0){const pts=[];for(let k=0;k<=24;k++)pts.push(qpt(a,cv.c,b,f*k/24));el("path",{d:"M"+pts.map(p=>p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" L"),stroke:"var(--gold)","stroke-width":4.6,"vector-effect":"non-scaling-stroke"},G.route);}
       t0+=ls;}}
 }
 function drawTrail(){G.trail.innerHTML="";for(const h of ((S&&S.log)||[]).slice(-60)){if(!h.pts||h.pts.length<2)continue;
@@ -1014,12 +1089,13 @@ function drawStamps(){G.stamps.innerHTML="";updateLabels();
 
 /* ---------- billboards ---------- */
 const BB=[];
-function addBB(x,y,html,{w=40,h=40,cls="",scale=true,z=0,cap=2.2}={}){const d=document.createElement("div");d.className="bb "+cls;d.style.width=w+"px";d.style.height=h+"px";d.innerHTML=html;bbLayer.append(d);const o={el:d,x,y,w,h,scale,z,cap};BB.push(o);placeBB(o);return o;}
+function addBB(x,y,html,{w=40,h=40,cls="",scale=true,z=0,cap=2.2,mult=1}={}){const d=document.createElement("div");d.className="bb "+cls;d.style.width=w+"px";d.style.height=h+"px";d.innerHTML=html;bbLayer.append(d);const o={el:d,x,y,w,h,scale,z,cap,mult};BB.push(o);placeBB(o);return o;}
 function removeBB(o){if(!o)return;o.el.remove();const i=BB.indexOf(o);if(i>=0)BB.splice(i,1);}
 function placeBB(o){
-  const px=(o.x-VB.x)/VB.w,py=(o.y-VB.y)/VB.h,out=px<.015||px>.985||py<.045||py>.995;o.el.hidden=out;if(out)return;
+  const px=(o.x-VB.x)/VB.w,py=(o.y-VB.y)/VB.h,out=px<.015||px>.985||py<.045||py>.995;o.el.hidden=out;if(out){if(o===ME.o)placeMeBubble();return;}
   const W=bbLayer.clientWidth||600,H=bbLayer.clientHeight||540,zoom=MAP.W/VB.w,s=o.scale?Math.min(o.cap,Math.max(.75,Math.sqrt(zoom)*.85))*(W/620):Math.max(.7,W/620)*Math.min(1.5,Math.max(1,Math.sqrt(zoom)*.8));
-  o.el.style.transform=`translate(${(px*W-o.w/2).toFixed(1)}px,${(py*H-o.h).toFixed(1)}px) translateZ(${1+o.z}px) rotateZ(${(-ROT).toFixed(2)}deg) rotateX(calc(-1 * var(--tilt))) scale(${s.toFixed(3)})`;
+  o.el.style.transform=`translate(${(px*W-o.w/2).toFixed(1)}px,${(py*H-o.h).toFixed(1)}px) translateZ(${1+o.z}px) rotateZ(${(-ROT).toFixed(2)}deg) rotateX(calc(-1 * var(--tilt))) scale(${(s*(o.mult||1)).toFixed(3)})`;
+  if(o===ME.o)placeMeBubble();
 }
 let placeQueued=false;
 function placeAll(){if(placeQueued)return;placeQueued=true;requestAnimationFrame(()=>{placeQueued=false;BB.forEach(placeBB);});}
@@ -1088,20 +1164,28 @@ function facing(dx,dy){
 }
 function spriteFor(kind,view){const base=KSYM[kind]||"v-car";if(view==="s")return {id:base,w:kind==="train"?70:kind==="bus"?60:56,h:kind==="train"?33:36};
   return {id:base+"-"+view,w:kind==="plane"?46:kind==="ship"?38:36,h:kind==="plane"?32:36};}
-function vehHTML(sp){return `<div class="veh"><svg width="${sp.w}" height="${sp.h}"><use href="#${sp.id}"/></svg></div><span class="bubble" hidden></span>`;}
+function vehHTML(sp){return `<div class="veh"><svg width="${sp.w}" height="${sp.h}"><use href="#${sp.id}"/></svg></div>`;}
 function updateVeh(holder,kind,x,y,dx,dy,state,debt,scale=false,label=null){
   const ra=ROT*Math.PI/180,rdx=dx*Math.cos(ra)-dy*Math.sin(ra),rdy=dx*Math.sin(ra)+dy*Math.cos(ra);
   const f=facing(rdx,rdy),sp=spriteFor(kind,f.view),key=sp.id;
-  if(!holder.o||holder.key!==key){removeBB(holder.o);holder.o=addBB(x,y,vehHTML(sp),{w:sp.w,h:sp.h,z:label!==null?6:8,scale});holder.key=key;}
+  if(!holder.o||holder.key!==key){removeBB(holder.o);holder.o=addBB(x,y,vehHTML(sp),{w:sp.w,h:sp.h,z:label!==null?6:8,scale,mult:label!==null?.55:1});holder.key=key;}
   holder.o.x=x;holder.o.y=y;const inner=holder.o.el.querySelector(".veh");
   inner.style.transform=`rotate(${f.lean.toFixed(1)}deg)${f.flip?" scaleX(-1)":""}`;
   inner.className="veh "+(state==="drive"?"go":state==="shelter"?"hazard":"")+(debt?" debt":"")+(label!==null?" ghost":"");
-  const bub=holder.o.el.querySelector(".bubble");if(bub&&!holder.flash){bub.hidden=!(state==="rest"||state==="shelter");bub.className="bubble";bub.textContent=state==="rest"?"휴게소 P":state==="shelter"?"졸음쉼터 Zz":"";}
+  if(holder===ME){ME.state=state;if(!ME.flash)meBubbleText();}
   placeBB(holder.o);
 }
 const ME={o:null,key:null};
-function clearVehicle(){removeBB(ME.o);ME.o=null;ME.key=null;}
-function flashBubble(text){if(!ME.o)return;const b=ME.o.el.querySelector(".bubble");if(!b)return;ME.flash=true;b.hidden=false;b.className="bubble coin";b.textContent=text;clearTimeout(flashBubble._t);flashBubble._t=setTimeout(()=>{ME.flash=false;},2200);}
+function clearVehicle(){removeBB(ME.o);ME.o=null;ME.key=null;ME.state=null;placeMeBubble();}
+function meBubbleText(){const b=$("#meBubble");if(!b)return;b.className="bubble";b.textContent=ME.state==="rest"?"휴게소 P":ME.state==="shelter"?"졸음쉼터 Zz":"";}
+/* the bubble floats flat over the map (not inside the 3D plane), so pins and the tilt can't cut it */
+function placeMeBubble(){const b=$("#meBubble");if(!b)return;const v=ME.o&&!ME.o.el.hidden&&ME.o.el.querySelector(".veh");
+  if(!v||!b.textContent){b.hidden=true;return;}
+  const c=b.parentElement.getBoundingClientRect(),r=v.getBoundingClientRect();if(!r.width){b.hidden=true;return;}
+  const x=Math.max(60,Math.min(c.width-60,r.left+r.width/2-c.left)),y=Math.max(34,r.top-c.top);
+  b.style.left=x.toFixed(1)+"px";b.style.top=y.toFixed(1)+"px";b.hidden=false;}
+function flashBubble(text){if(!ME.o)return;const b=$("#meBubble");if(!b)return;ME.flash=true;b.className="bubble coin";b.textContent=text;placeMeBubble();clearTimeout(flashBubble._t);
+  flashBubble._t=setTimeout(()=>{ME.flash=false;meBubbleText();placeMeBubble();},2200);}
 
 let pinHome=null,pinDest=null,pinRests=[],pinTolls=[];
 function setHomePin(){removeBB(pinHome);pinHome=null;if(!S||!S.origin)return;const r=BYKEY[S.origin],[x,y]=prj(r.la,r.lo);
@@ -1119,6 +1203,8 @@ const unhex=h=>new Uint8Array(h.match(/../g).map(x=>parseInt(x,16)));
 async function sha(s){return hex(await crypto.subtle.digest("SHA-256",enc.encode(s)));}
 async function pwHash(pw,salt){const key=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveBits"]);return hex(await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt:unhex(salt),iterations:150000},key,256));}
 const normNick=s=>s.normalize("NFC").trim().replace(/\s+/g," ").toLowerCase();
+const nickKey=s=>s.normalize("NFC").toLowerCase().replace(/[\s_]+/g,"");
+let boardReadyResolve;const boardReady=new Promise(r=>{boardReadyResolve=r;setTimeout(r,6000);});
 const nickId=async nick=>"n_"+(await sha("study-drive:"+normNick(nick))).slice(0,32);
 const Local={
   read(k){try{return JSON.parse(localStorage.getItem(k)||"{}");}catch(e){return {};}},
@@ -1140,26 +1226,65 @@ const storeReady=fbLoaded.then(()=>{
     localBoard();$("#boardNote").textContent="이 브라우저에서 등록한 운전자끼리 순위를 겨뤄요.";}
   syncNote();});
 async function getDoc(id){return Local.get(id);}
-let lastBoardJSON="",chain=Promise.resolve();
-function liveOf(T){if(!T)return null;const r=n=>+n.toFixed(4);
-  return {legs:T.legs.map(l=>[r(l.from.la),r(l.from.lo),r(l.to.la),r(l.to.lo),l.kind,l.min]),totalSec:T.totalSec,acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0};}
-function boardDoc(){return {nick:S.nick,trips:S.totals.trips,min:S.totals.min,km:S.totals.km,coins:S.coins,live:liveOf(S.trip)};}
+let lastBoardJSON="",lastPlayerJSON="",lastRowJSON="",rowBlocked=false,chain=Promise.resolve();
+function markLive(T){if(T)T.liveRef={acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0};}
+function liveOf(T){if(!T)return null;const r=n=>+n.toFixed(4),R=T.liveRef||{acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0};
+  return {legs:T.legs.map(l=>[r(l.from.la),r(l.from.lo),r(l.to.la),r(l.to.lo),l.kind,l.min]),totalSec:T.totalSec,...R};}
+function boardDoc(){return {nick:S.nick,trips:S.totals.trips,min:S.totals.min,km:S.totals.km,debt:S.coins<0,live:liveOf(S.trip)};}
 function save(){if(!S||!accId)return;S.updated=Date.now();
   const bd=boardDoc();
-  if(CLOUD){const {F,db}=CLOUD,id=accId,data=JSON.stringify(S),bj=JSON.stringify(bd);
-    chain=chain.then(()=>F.setDoc(F.doc(db,"players",id),{data,updated:Date.now()})).then(()=>{if(bj===lastBoardJSON)return;lastBoardJSON=bj;
-      return F.setDoc(F.doc(db,"board",id),{nick:bd.nick,trips:bd.trips,min:bd.min,km:bd.km,coins:bd.coins,live:bd.live?JSON.stringify(bd.live):null,updated:Date.now()});})
-      .then(()=>syncNote()).catch(e=>{console.error(e);syncNote(e);if(e&&e.code==="permission-denied")toast("저장 권한이 없어요. Firestore 보안 규칙을 확인해 주세요.");});}
+  if(CLOUD){const {F,db}=CLOUD,id=accId,data=JSON.stringify(S),pj=JSON.stringify({...S,updated:0});
+    try{localStorage.setItem("sdrive-bak-"+id,data);}catch(e){}
+    const live={nick:bd.nick,trips:bd.trips,min:bd.min,km:bd.km,debt:bd.debt,liveOn:!!bd.live,live:bd.live?JSON.stringify(bd.live):null},lj=JSON.stringify(live);
+    const row={n:bd.nick,t:bd.trips,m:bd.min,k:bd.km},rj=JSON.stringify(row);
+    mergeBoard();
+    chain=chain.then(()=>{if(pj===lastPlayerJSON)return;return F.setDoc(F.doc(db,"players",id),{data,updated:Date.now()}).then(()=>{lastPlayerJSON=pj;});})
+      .then(()=>{if(lj===lastBoardJSON)return;return F.setDoc(F.doc(db,"board",id),{...live,updated:Date.now()}).then(()=>{lastBoardJSON=lj;});})
+      .then(()=>{if(rj===lastRowJSON||rowBlocked)return;const u=Date.now();
+        return F.setDoc(F.doc(db,"meta","board"),{rows:{[id]:{...row,u}}},{merge:true}).then(()=>{lastRowJSON=rj;patchCache(id,{nick:row.n,trips:row.t,min:row.m,km:row.k,updated:u});})
+          .catch(e=>{if(e&&e.code==="permission-denied"){rowBlocked=true;console.warn("meta/board 규칙이 아직 없어요",e);}else throw e;});})
+      .then(()=>syncNote()).catch(e=>{console.error(e);syncNote(e);if(e&&e.code==="permission-denied")toast("저장 권한이 없어요. Firestore 보안 규칙을 확인해 주세요.");
+        else if(e&&e.code==="resource-exhausted")toast("오늘 서버 무료 사용량이 다 찼어요. 기록은 이 기기에 남아 있고, 내일 다시 저장돼요.");});}
   else{const snap=JSON.parse(JSON.stringify(S));Local.put(accId,snap);Local.putBoard(accId,{...bd,updated:Date.now()});localBoard();}
   renderCoins();
 }
-function syncNote(e){const n=$("#syncNote");if(!n)return;n.textContent=CLOUD&&e?"저장 실패 · 인터넷 연결을 확인해 주세요":"";}
+function syncNote(e){const n=$("#syncNote");if(!n)return;n.textContent=CLOUD&&e?(e.code==="resource-exhausted"?"오늘 서버 사용량 초과 · 이 기기에 저장 중":"저장 실패 · 인터넷 연결을 확인해 주세요"):"";}
 function localBoard(){const a=Local.read("sdrive-board");BOARD=Object.entries(a).map(([id,d])=>({id,...d}));renderBoard();renderOthers();}
-function subscribeCloudBoard(){const {F,db}=CLOUD;if(boardUnsub)boardUnsub();
-  boardUnsub=F.onSnapshot(F.query(F.collection(db,"board"),F.limit(1000)),snap=>{
-    BOARD=snap.docs.map(d=>{const x=d.data();let live=null;try{live=x.live?JSON.parse(x.live):null;}catch(e){}return {id:d.id,...x,live};});renderBoard();renderOthers();},
-    err=>{console.error(err);$("#boardNote").textContent=err&&err.code==="permission-denied"?"순위표를 읽을 권한이 없어요. Firestore 보안 규칙을 확인해 주세요.":"순위표를 불러오지 못했어요. 새로고침해 주세요.";});}
-async function cloudLoad(uid){const {F,db}=CLOUD;const snap=await F.getDoc(F.doc(db,"players",uid));if(!snap.exists())return null;try{return JSON.parse(snap.data().data);}catch(e){return null;}}
+/* ---- leaderboard: one summary doc (1 read), cached; live cars: only drivers on the road ---- */
+const BOARD_CACHE="sdrive-board-cache",BOARD_TTL=10*60e3;let BASE=[],LIVE=new Map(),liveReady=false,boardAt=0,boardSrc="",liveUnsub=null;
+function parseLiveDoc(id,x){let live=null;try{live=x.live?JSON.parse(x.live):null;}catch(e){}return {id,nick:x.nick,trips:x.trips||0,min:x.min||0,km:x.km||0,debt:!!x.debt||(x.coins||0)<0,live,liveAt:x.updated||0};}
+function mergeBoard(){if(!CLOUD)return;const m=new Map();
+  for(const b of BASE)if(b&&b.nick)m.set(b.id,{...b,live:liveReady?null:b.live||null});
+  for(const [id,x] of LIVE){const o=m.get(id);m.set(id,{...(o||{updated:x.liveAt}),...x,trips:Math.max(x.trips,o?o.trips||0:0),min:Math.max(x.min,o?o.min||0:0),km:Math.max(x.km,o?o.km||0:0)});}
+  if(S&&accId){const o=m.get(accId)||{};m.set(accId,{...o,id:accId,nick:S.nick,trips:S.totals.trips,min:S.totals.min,km:S.totals.km,updated:o.updated||S.created||Date.now(),live:liveOf(S.trip)});}
+  BOARD=[...m.values()];renderBoard();renderOthers();}
+function cacheKey(){return BOARD_CACHE+":"+((window.FIREBASE_CONFIG&&window.FIREBASE_CONFIG.projectId)||"");}
+function patchCache(id,row){const i=BASE.findIndex(b=>b.id===id);if(i>=0)BASE[i]={...BASE[i],...row};else BASE.push({id,...row});
+  try{const c=JSON.parse(localStorage.getItem(cacheKey())||"null");if(c){c.rows=BASE;localStorage.setItem(cacheKey(),JSON.stringify(c));}}catch(e){}}
+function boardErr(err){console.error(err);const c=err&&err.code;
+  $("#boardNote").textContent=c==="permission-denied"?"순위표를 읽을 권한이 없어요. Firestore 보안 규칙을 확인해 주세요.":c==="resource-exhausted"?"오늘 서버 무료 사용량이 다 차서 순위표를 잠시 쉬어요. 내일 다시 열려요.":"순위표를 불러오지 못했어요. 잠시 뒤 새로고침을 눌러 주세요.";}
+async function loadBoard(force=false){const {F,db}=CLOUD;
+  if(!force){try{const c=JSON.parse(localStorage.getItem(cacheKey())||"null");
+    if(c&&Array.isArray(c.rows)&&Date.now()-c.at<BOARD_TTL){BASE=c.rows;boardAt=c.at;boardSrc=c.src||"";boardReadyResolve();mergeBoard();return;}}catch(e){}}
+  try{let rows=null,src="meta";
+    try{const snap=await F.getDoc(F.doc(db,"meta","board"));if(snap.exists()){const R=snap.data().rows||{};rows=Object.entries(R).map(([id,r])=>({id,nick:r.n,trips:r.t||0,min:r.m||0,km:r.k||0,updated:r.u||0}));}}
+    catch(e){if(!(e&&e.code==="permission-denied"))throw e;}
+    if(!rows||!rows.length){src="docs";const snap=await F.getDocs(F.query(F.collection(db,"board"),F.limit(1000)));
+      rows=snap.docs.map(d=>{const x=d.data();return {id:d.id,nick:x.nick,trips:x.trips||0,min:x.min||0,km:x.km||0,updated:x.updated||0};});}
+    BASE=rows.filter(r=>r.nick);boardAt=Date.now();boardSrc=src;
+    try{localStorage.setItem(cacheKey(),JSON.stringify({at:boardAt,src,rows:BASE}));}catch(e){}
+  }catch(err){boardErr(err);}
+  boardReadyResolve();mergeBoard();}
+function subscribeLive(){const {F,db}=CLOUD;if(liveUnsub)liveUnsub();
+  liveUnsub=F.onSnapshot(F.query(F.collection(db,"board"),F.where("liveOn","==",true),F.limit(100)),snap=>{
+    LIVE=new Map(snap.docs.map(d=>[d.id,parseLiveDoc(d.id,d.data())]));liveReady=true;mergeBoard();},err=>{console.error(err);});}
+function subscribeCloudBoard(){loadBoard();subscribeLive();}
+$("#lbRefresh").addEventListener("click",()=>{if(!CLOUD){localBoard();return;}
+  if(Date.now()-boardAt<60e3){toast("방금 불러온 순위예요. 1분 뒤에 다시 눌러 주세요.");return;}
+  $("#boardNote").textContent="불러오는 중…";loadBoard(true);});
+async function cloudLoad(uid){const {F,db}=CLOUD;let bak=null,d=null,ex=null;try{bak=JSON.parse(localStorage.getItem("sdrive-bak-"+uid)||"null");}catch(e){}
+  try{const snap=await F.getDoc(F.doc(db,"players",uid));if(snap.exists()){try{d=JSON.parse(snap.data().data);}catch(e){}}}catch(e){ex=e;}
+  if(bak&&bak.nick&&(!d||(bak.updated||0)>(d.updated||0)))return bak;if(ex&&!d)throw ex;return d;}
 function authMsg(e){const c=e&&e.code||"";
   if(c==="auth/email-already-in-use")return "이미 쓰고 있는 닉네임이에요. 위 면허증으로 로그인하거나 다른 닉네임을 지어 주세요.";
   if(c==="auth/invalid-credential"||c==="auth/wrong-password"||c==="auth/user-not-found"||c==="auth/invalid-login-credentials")return "닉네임이나 비밀번호가 맞지 않아요.";
@@ -1202,9 +1327,11 @@ $("#regForm").addEventListener("submit",async e=>{e.preventDefault();const err=$
   if(!needCrypto(err))return;
   const btn=$("#regBtn");btn.disabled=true;btn.textContent="면허 발급 중…";
   try{await storeReady;const id=await nickId(nick),key=$("#oProv").value+"|"+$("#oReg").value;
-    if(CLOUD){const {A,auth}=CLOUD;loggingIn=true;const cred=await A.createUserWithEmailAndPassword(auth,`${id}@${EMAIL_DOMAIN}`,pw);
+    if(CLOUD){await boardReady;const k=nickKey(nick);
+      if(BOARD.some(b=>b&&b.nick&&nickKey(b.nick)===k)){err.textContent="이미 쓰고 있는 닉네임이에요. 띄어쓰기나 대소문자만 다른 닉네임도 같은 닉네임으로 봐요.";return;}
+      const {A,auth}=CLOUD;loggingIn=true;const cred=await A.createUserWithEmailAndPassword(auth,`${id}@${EMAIL_DOMAIN}`,pw);
       S=upgrade({v:3,nick,origin:key,start:key,created:Date.now()});accId=cred.user.uid;}
-    else{if(await getDoc(id)){err.textContent="이미 쓰고 있는 닉네임이에요. 위 면허증으로 로그인하거나 다른 닉네임을 지어 주세요.";return;}
+    else{const k=nickKey(nick);if(await getDoc(id)||Object.values(Local.read("sdrive-board")).some(b=>b&&b.nick&&nickKey(b.nick)===k)){err.textContent="이미 쓰고 있는 닉네임이에요. 위 면허증으로 로그인하거나 다른 닉네임을 지어 주세요.";return;}
       const salt=hex(crypto.getRandomValues(new Uint8Array(16))),hash=await pwHash(pw,salt);
       S=upgrade({v:3,nick,salt,hash,origin:key,start:key,created:Date.now()});accId=id;}
     save();$("#rpw").value="";$("#rpw2").value="";$("#rnick").value="";
@@ -1214,8 +1341,8 @@ $("#regForm").addEventListener("submit",async e=>{e.preventDefault();const err=$
 });
 function upgrade(d){d.v=3;d.stamps=d.stamps||{};d.totals=d.totals||{min:0,km:0,trips:0};d.totals.trips=d.totals.trips||0;d.log=d.log||[];
   if(typeof d.coins!=="number")d.coins=5;d.attend=d.attend||{count:0,last:""};d.pick=d.pick||{prov:null,dest:null,changes:0,lockUntil:0};d.trip=d.trip||null;if(d.trip){d.trip.tolls=d.trip.tolls||[];d.trip.tollsPaid=d.trip.tollsPaid||0;d.trip.bonus=d.trip.bonus||3;d.trip.stops=d.trip.stops||[];}return d;}
-function afterLogin(msg){if(!CLOUD){try{localStorage.setItem("sdrive-session",accId);}catch(e){}}$("#lpw").value="";lastBoardJSON="";toast(msg);save();restorePick();route();}
-$("#logoutBtn").addEventListener("click",async()=>{if(S&&S.trip&&S.trip.state==="drive"){const T=S.trip;T.acc=studied(Date.now());T.state="shelter";T.pausedAt=Date.now();save();}
+function afterLogin(msg){if(!CLOUD){try{localStorage.setItem("sdrive-session",accId);}catch(e){}}$("#lpw").value="";lastBoardJSON="";lastPlayerJSON="";lastRowJSON="";toast(msg);save();restorePick();route();}
+$("#logoutBtn").addEventListener("click",async()=>{if(S&&S.trip&&S.trip.state==="drive"){const T=S.trip;T.acc=studied(Date.now());T.state="shelter";T.pausedAt=Date.now();markLive(T);save();}
   if(CLOUD){try{await chain;await CLOUD.A.signOut(CLOUD.auth);}catch(e){}}
   try{localStorage.removeItem("sdrive-session");}catch(e){}S=null;accId=null;clearVehicle();setDestPin(null);setTripPins(null);G.route.innerHTML="";routePts=[];wheelItems=[];dest=null;viewAll();route();});
 
@@ -1324,7 +1451,7 @@ $("#goBtn").addEventListener("click",()=>{if(!dest)return;const pl=PLANS[mode],n
   const T={dest:dest.key,from:S.origin,mode,totalSec:pl.min*60,km:pl.km,legs:pl.legs,bonus:pl.bonus,acc:0,seg:now,state:"drive",restEnd:0,restsTaken:0,pausedAt:0,startedAt:now,stops:[],tolls:[],tollsPaid:0};
   for(let k=1;k*60<pl.min;k++)T.stops.push({at:k*3600});T.stops.forEach(s=>s.name=restName(T,s.at));
   const sc=legScale(T);let t0=0;for(const l of T.legs){const ls=l.min*60*sc;if((l.kind==="car"||l.kind==="bus")&&l.km>=TOLL_MIN){const n=Math.ceil(l.km/TOLL_KM);for(let i=0;i<n;i++)T.tolls.push({at:Math.round(t0+(i+.5)/n*ls)});}t0+=ls;}
-  S.trip=T;const pk=S.pick;pk.prov=null;pk.dest=null;if(!(pk.changes>=3&&pk.lockUntil>Date.now())){pk.changes=0;pk.lockUntil=0;}
+  markLive(T);S.trip=T;const pk=S.pick;pk.prov=null;pk.dest=null;if(!(pk.changes>=3&&pk.lockUntil>Date.now())){pk.changes=0;pk.lockUntil=0;}
   save();chime("go");wakeOn();route();});
 function studied(now){const T=S.trip;return T.acc+(T.state==="drive"?(now-T.seg)/1000:0);}
 function payTolls(now,live){const T=S.trip;let paid=0;while(T.tollsPaid<T.tolls.length&&T.tolls[T.tollsPaid].at<=studied(now)){T.tollsPaid++;S.coins-=1;paid++;
@@ -1357,9 +1484,9 @@ function renderDrive(force){const T=S.trip;if(!T)return;const now=Date.now(),d=B
   updateVeh(ME,p.leg.kind,p.x,p.y,p.dx,p.dy,T.state,S.coins<0);
   if(force||now-lastRouteDraw>2000){drawRoute(T.legs,st,T.totalSec);lastRouteDraw=now;}
 }
-$("#shelterBtn").addEventListener("click",()=>{const T=S.trip,now=Date.now();if(!T||T.state!=="drive")return;T.acc=studied(now);T.state="shelter";T.pausedAt=now;save();wakeOff();renderDrive(true);});
-$("#resumeBtn").addEventListener("click",()=>{const T=S.trip;if(!T||T.state!=="shelter")return;T.state="drive";T.pauseReason=null;T.seg=Date.now();save();chime("go");wakeOn();renderDrive(true);});
-$("#restSkip").addEventListener("click",()=>{const T=S.trip;if(!T||T.state!=="rest")return;T.restsTaken++;T.state="drive";T.seg=Date.now();save();chime("go");renderDrive(true);});
+$("#shelterBtn").addEventListener("click",()=>{const T=S.trip,now=Date.now();if(!T||T.state!=="drive")return;T.acc=studied(now);T.state="shelter";T.pausedAt=now;markLive(T);save();wakeOff();renderDrive(true);});
+$("#resumeBtn").addEventListener("click",()=>{const T=S.trip;if(!T||T.state!=="shelter")return;T.state="drive";T.pauseReason=null;T.seg=Date.now();markLive(T);save();chime("go");wakeOn();renderDrive(true);});
+$("#restSkip").addEventListener("click",()=>{const T=S.trip;if(!T||T.state!=="rest")return;T.restsTaken++;T.state="drive";T.seg=Date.now();markLive(T);save();chime("go");renderDrive(true);});
 $("#quitBtn").addEventListener("click",()=>{$("#quitConfirm").hidden=false;$("#quitBtn").hidden=true;});
 $("#quitNo").addEventListener("click",()=>{$("#quitConfirm").hidden=true;$("#quitBtn").hidden=false;});
 $("#quitYes").addEventListener("click",()=>{const T=S.trip;if(!T)return;const m=Math.floor(T.acc/60);S.totals.min+=m;S.trip=null;save();wakeOff();clearVehicle();setTripPins(null);toast(`여정을 마쳤어요. 공부한 ${fmtMin(m)}은 기록에 더했어요.`);loadStage1();route();});
@@ -1396,9 +1523,14 @@ $("#nextBtn").addEventListener("click",()=>{if(lastArrival){const st=S.stamps[la
 let lbField="trips";
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>{lbField=b.dataset.f;document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x===b));renderBoard();}));
 const fmtVal=(f,v)=>f==="trips"?`${v||0}번`:f==="min"?fmtMin(v||0):`${(v||0).toLocaleString()}km`;
+function estLive(L,now){let st=L.acc,t;if(L.state==="shelter")return {st,state:"shelter"};
+  if(L.state==="rest"){if(now<L.restEnd)return {st,state:"rest"};t=L.restEnd;}else t=L.seg;
+  let rem=Math.max(0,(now-t)/1000);
+  for(let i=0;i<300;i++){const nx=(Math.floor(st/3600+1e-9)+1)*3600;if(nx>=L.totalSec||st+rem<nx)return {st:Math.min(L.totalSec,st+rem),state:"drive"};
+    rem-=nx-st;st=nx;if(rem<300)return {st,state:"rest"};rem-=300;}
+  return {st:Math.min(st,L.totalSec),state:"drive"};}
 function isLive(b,now=Date.now()){const L=b.live;if(!L||!L.legs||!L.legs.length)return false;
-  const st=L.acc+((L.state==="drive"?now-L.seg:L.state==="rest"&&now>L.restEnd?now-L.restEnd:0)/1000);
-  if(st>=L.totalSec)return false;if(L.state==="shelter"&&now-L.pausedAt>2*3600e3)return false;if(now-(b.updated||0)>2*DAY)return false;return true;}
+  if(estLive(L,now).st>=L.totalSec)return false;if(L.state==="shelter"&&now-L.pausedAt>2*3600e3)return false;if(now-(b.liveAt||b.updated||0)>2*DAY)return false;return true;}
 function renderBoard(){
   const f=lbField,list=BOARD.filter(b=>b&&b.nick).map(b=>({...b,v:b[f]||0})).sort((a,b)=>b.v-a.v||(a.updated||0)-(b.updated||0));
   let rank=0,prev=null;list.forEach((b,i)=>{if(b.v!==prev){rank=i+1;prev=b.v;}b.rank=rank;});
@@ -1412,7 +1544,8 @@ function renderBoard(){
   const mr=$("#myrank");const me=accId&&list.find(b=>b.id===accId);mr.hidden=!S;
   if(S){if(me){const pct=Math.max(1,Math.ceil(me.rank/list.length*100));mr.innerHTML=`<span>내 순위 · ${esc(S.nick)}</span><b>${me.rank<=100?`${me.rank}위`:`상위 ${pct}%`}</b><span class="num">${fmtVal(f,me.v)}${me.rank<=100?` · 상위 ${pct}%`:" · 100위 밖"}</span>`;}
     else mr.innerHTML=`<span>내 순위</span><b>집계 중</b><span class="small">저장되면 나타나요</span>`;}
-  $("#boardNote").textContent=`이 브라우저의 운전자 ${list.length}명 · 상위 100명까지 보여요.`;
+  if(CLOUD){const t=boardAt?new Date(boardAt):null;$("#boardNote").textContent=`운전자 ${list.length}명 · 상위 100명까지 보여요`+(t?` · ${String(t.getHours()).padStart(2,"0")}:${String(t.getMinutes()).padStart(2,"0")} 기준 (달리는 중인 운전자는 바로 반영)`:"");}
+  else $("#boardNote").textContent=`이 브라우저의 운전자 ${list.length}명 · 상위 100명까지 보여요.`;
 }
 
 /* ================= other drivers ================= */
@@ -1421,19 +1554,18 @@ function renderOthers(){
   const now=Date.now(),seen=new Set();let live=0;
   for(const b of BOARD){if(!b||b.id===accId||!isLive(b,now))continue;live++;if(live>40)break;
     const L=b.live,T={legs:L.legs.map(a=>({from:{la:a[0],lo:a[1]},to:{la:a[2],lo:a[3]},kind:a[4],min:a[5]})),totalSec:L.totalSec};
-    const st=Math.min(L.totalSec,L.acc+((L.state==="drive"?now-L.seg:L.state==="rest"&&now>L.restEnd?now-L.restEnd:0)/1000)),p=posAt(T,st);
+    const E=estLive(L,now),st=E.st,p=posAt(T,st);
     let h=OTHERS.get(b.id);if(!h){h={o:null,key:null};OTHERS.set(b.id,h);}seen.add(b.id);
-    const state=L.state==="rest"&&now>L.restEnd?"drive":L.state;
-    updateVeh(h,p.leg.kind,p.x,p.y,p.dx,p.dy,state,(b.coins||0)<0,false,"");}
+    updateVeh(h,p.leg.kind,p.x,p.y,p.dx,p.dy,E.state,!!b.debt||(b.coins||0)<0,false,"");}
   for(const [id,h] of OTHERS)if(!seen.has(id)){removeBB(h.o);OTHERS.delete(id);}
-  const sig=[...seen].sort().join(",")+"|"+BOARD.length;if(sig!==renderOthers.sig){renderOthers.sig=sig;drawOtherRoutes(seen);}
+  const sig=[...seen].sort().map(id=>{const b=BOARD.find(x=>x.id===id);return id+":"+(b&&b.live?b.live.totalSec+"/"+b.live.legs.length:"");}).join(",");if(sig!==renderOthers.sig){renderOthers.sig=sig;drawOtherRoutes(seen);}
   const lc=$("#liveCount");lc.hidden=!live;lc.textContent=`지금 달리는 운전자 ${live}명`;
 }
 
 function drawOtherRoutes(ids){if(!G.others)return;G.others.innerHTML="";
   for(const b of BOARD){if(!ids.has(b.id))continue;for(const a of b.live.legs){const l={from:{la:a[0],lo:a[1]},to:{la:a[2],lo:a[3]},kind:a[4]},[p,q]=legPts(l),cv=curve(p,q,BEND[l.kind]);
-    el("path",{d:cv.d,stroke:"#ffffff","stroke-width":4,opacity:".55","vector-effect":"non-scaling-stroke"},G.others);
-    el("path",{d:cv.d,stroke:l.kind==="ship"?"#2f6fd6":l.kind==="plane"?"#e5533a":"#7a8a99","stroke-width":2,"stroke-dasharray":"6 7",opacity:".8","vector-effect":"non-scaling-stroke"},G.others);}}}
+    el("path",{d:cv.d,stroke:"#ffffff","stroke-width":2.2,opacity:".5","vector-effect":"non-scaling-stroke"},G.others);
+    el("path",{d:cv.d,stroke:l.kind==="ship"?"#2f6fd6":l.kind==="plane"?"#e5533a":"#7a8a99","stroke-width":1.2,"stroke-dasharray":"4 5",opacity:".75","vector-effect":"non-scaling-stroke"},G.others);}}}
 /* ================= passport ================= */
 let bookFilter="all",recolorKey=null,recolorPick=null;
 function openRecolor(key){recolorKey=key;recolorPick=(S.stamps[key]&&S.stamps[key].color)||"yellow";paintPreview={key,c:recolorPick};drawStamps();renderBook();
@@ -1496,7 +1628,7 @@ setInterval(applySky,60000);
 let guardOn=true;try{guardOn=localStorage.getItem("sdrive-guard")!=="off";}catch(e){}
 $("#guardOn").checked=guardOn;$("#guardOn").addEventListener("change",e=>{guardOn=e.target.checked;try{localStorage.setItem("sdrive-guard",guardOn?"on":"off");}catch(e){}toast(guardOn?"딴짓 감지를 켰어요":"딴짓 감지를 껐어요");});
 document.addEventListener("visibilitychange",()=>{
-  if(document.hidden){if(guardOn&&S&&S.trip&&S.trip.state==="drive"){advance(Date.now());const T=S.trip;if(T&&T.state==="drive"){const now=Date.now();T.acc=studied(now);T.state="shelter";T.pausedAt=now;T.pauseReason="phone";T.warnPending=true;S.warnings=(S.warnings||0)+1;save();}}return;}
+  if(document.hidden){if(guardOn&&S&&S.trip&&S.trip.state==="drive"){advance(Date.now());const T=S.trip;if(T&&T.state==="drive"){const now=Date.now();T.acc=studied(now);T.state="shelter";T.pausedAt=now;T.pauseReason="phone";T.warnPending=true;markLive(T);S.warnings=(S.warnings||0)+1;save();}}return;}
   applySky();
   if(S&&S.trip&&S.trip.warnPending){S.trip.warnPending=false;save();chime("warn");toast(`운전 중 전자기기 사용 경고 ${S.warnings}번째 · 졸음쉼터에 정차했어요`);if(!$("#drive").hidden)renderDrive(true);}
   if(S&&S.trip&&S.trip.state==="drive")wakeOn();});
@@ -1510,7 +1642,30 @@ let rulesSeen=false;try{rulesSeen=localStorage.getItem("sdrive-rules-seen")==="1
 let lastFocus=null;
 function openModal(id){lastFocus=document.activeElement;const m=$(id);m.hidden=false;const sh=m.querySelector(".sheet");sh.setAttribute("tabindex","-1");sh.scrollTop=0;sh.focus({preventScroll:true});}
 function closeModal(id){$(id).hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
-function showBlocks(){$("#blocks").hidden=!(rulesSeen||S);$("#manualBtn").hidden=!rulesSeen;$("#shareBtn").hidden=!rulesSeen;$("#attendOpen").hidden=!S;$("#rulesClose").hidden=!rulesSeen;}
+/* ---------- feedback ---------- */
+let fbKind="오류";
+document.querySelectorAll("#fbModal [data-kind]").forEach(b=>b.addEventListener("click",()=>{fbKind=b.dataset.kind;document.querySelectorAll("#fbModal [data-kind]").forEach(x=>{x.setAttribute("aria-checked",x===b);x.setAttribute("aria-selected",x===b);});}));
+$("#fbText").addEventListener("input",()=>{$("#fbCount").textContent=`${[...$("#fbText").value].length} / 100`;});
+$("#fbOpen").addEventListener("click",()=>{$("#fbErr").textContent="";openModal("#fbModal");setTimeout(()=>$("#fbText").focus(),50);});
+$("#fbClose").addEventListener("click",()=>closeModal("#fbModal"));
+$("#fbForm").addEventListener("submit",async e=>{e.preventDefault();const err=$("#fbErr");err.textContent="";
+  const text=$("#fbText").value.trim().slice(0,100);
+  if(!text){err.textContent="내용을 적어 주세요.";return;}
+  if($("#fbBot").checked)return;
+  let last=0;try{last=+localStorage.getItem("sdrive-fb-last")||0;}catch(x){}
+  if(Date.now()-last<60000){err.textContent="방금 보냈어요. 1분 뒤에 다시 보낼 수 있어요.";return;}
+  const key=(window.WEB3FORMS_KEY||"").trim(),nick=S?S.nick:"비회원",at=new Date().toLocaleString("ko-KR",{timeZone:"Asia/Seoul"});
+  if(!key&&!CLOUD){err.textContent="아직 문의를 받을 곳이 설정되지 않았어요.";return;}
+  const btn=$("#fbSend");btn.disabled=true;btn.textContent="보내는 중…";let ok=false;
+  if(key){try{const fd=new FormData();fd.append("access_key",key);fd.append("subject",`[StudyDrive] ${fbKind}`);fd.append("from_name","StudyDrive");
+      fd.append("종류",fbKind);fd.append("내용",text);fd.append("닉네임",nick);fd.append("보낸 시각",at);fd.append("페이지",location.href);
+      const r=await fetch("https://api.web3forms.com/submit",{method:"POST",body:fd,headers:{Accept:"application/json"}});const j=await r.json().catch(()=>({}));ok=r.ok&&j.success!==false;}catch(x){console.error(x);}}
+  if(CLOUD){try{const {F,db}=CLOUD;await F.addDoc(F.collection(db,"feedback"),{kind:fbKind,text,nick,at,ts:Date.now(),page:location.href});ok=true;}catch(x){console.error(x);}}
+  btn.disabled=false;btn.textContent="보내기";
+  if(!ok){err.textContent="보내지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.";return;}
+  try{localStorage.setItem("sdrive-fb-last",String(Date.now()));}catch(x){}
+  $("#fbText").value="";$("#fbCount").textContent="0 / 100";closeModal("#fbModal");chime("go");toast("보냈어요. 소중한 의견 고마워요!");});
+function showBlocks(){$("#blocks").hidden=!(rulesSeen||S);$("#manualBtn").hidden=!rulesSeen;$("#shareBtn").hidden=!rulesSeen;$("#fbOpen").hidden=!(rulesSeen||S);$("#attendOpen").hidden=!S;$("#rulesClose").hidden=!rulesSeen;}
 $("#rulesOk").addEventListener("click",()=>{rulesSeen=true;try{localStorage.setItem("sdrive-rules-seen","1");}catch(e){}closeModal("#rulesModal");showBlocks();toast("설명서는 위쪽 '설명서' 블록에서 언제든 다시 볼 수 있어요");});
 const car=$("#carousel"),slidesEl=[...car.querySelectorAll(".slide")];let cIdx=0;
 slidesEl.forEach((_,i)=>{const d=document.createElement("button");d.type="button";d.setAttribute("aria-label",`${i+1}쪽`);d.addEventListener("click",()=>goSlide(i));$("#cDots").append(d);});
@@ -1523,7 +1678,7 @@ car.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();g
 setSlide(0);
 $("#rulesClose").addEventListener("click",()=>closeModal("#rulesModal"));
 $("#manualBtn").addEventListener("click",()=>{$("#rulesClose").hidden=false;openModal("#rulesModal");requestAnimationFrame(()=>goSlide(0));});
-function shareMsg(){return `같이 공부 드라이브 하자! 돌림판으로 뽑은 지역까지 가는 시간만큼 공부하고 도장 모으기${S?` · 나는 ${S.nick}`:""}\n${SHARE_URL}`;}
+function shareMsg(){return `같이 StudyDrive 하자! 돌림판으로 뽑은 지역까지 가는 시간만큼 공부하고 도장 모으기${S?` · 나는 ${S.nick}`:""}\n${SHARE_URL}`;}
 let qrMade=false;
 $("#shareBtn").addEventListener("click",()=>{$("#shareLink").value=SHARE_URL||"파일로 열어서 아직 링크가 없어요";$("#copyLink").disabled=!SHARE_URL;$("#shareMsg").value=shareMsg();openModal("#shareModal");if(!SHARE_URL)return;
   if(!qrMade&&window.QRCode){try{new QRCode($("#qr"),{text:SHARE_URL,width:300,height:300,colorDark:"#1f2a33",colorLight:"#ffffff"});qrMade=true;$("#qrWrap").hidden=false;}catch(e){}}});
@@ -1532,7 +1687,7 @@ $("#copyLink").addEventListener("click",()=>copyText(SHARE_URL,$("#shareLink")))
 $("#copyMsg").addEventListener("click",()=>copyText($("#shareMsg").value,$("#shareMsg")));
 $("#shareClose").addEventListener("click",()=>closeModal("#shareModal"));
 document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m&&(m.id!=="rulesModal"||rulesSeen))closeModal("#"+m.id);}));
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#attendModal").hidden){closeModal("#attendModal");return;}if(!$("#shareModal").hidden)closeModal("#shareModal");else if(!$("#rulesModal").hidden&&rulesSeen)closeModal("#rulesModal");});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#attendModal").hidden){closeModal("#attendModal");return;}if(!$("#fbModal").hidden){closeModal("#fbModal");return;}if(!$("#shareModal").hidden)closeModal("#shareModal");else if(!$("#rulesModal").hidden&&rulesSeen)closeModal("#rulesModal");});
 showBlocks();if(!rulesSeen)openModal("#rulesModal");
 
 buildMap();buildDeco();applySky();
