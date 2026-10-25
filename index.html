@@ -273,6 +273,8 @@ input:focus,select:focus{border-color:var(--accent);outline:none}
 .notice p{margin:4px 0 0;font-size:14px;white-space:pre-line}
 .notices .empty{text-align:center;color:var(--muted);font-size:14px;padding:16px 10px;border:2px dashed var(--line);border-radius:14px;margin:0}
 .fbsub{margin:6px 0 0;font-family:var(--f-display);font-weight:400;font-size:18px}
+#bookModal .sheet{max-width:880px}
+#bookModal .stats{margin-bottom:4px}
 #fbModal .tabs button{border:1px solid var(--line);border-radius:12px;padding:7px 14px;font-weight:700;font-size:14px;background:linear-gradient(var(--card),var(--card-2));box-shadow:0 4px 0 var(--card-edge)}
 #fbModal .tabs button[aria-checked="true"]{background:linear-gradient(#ff9ec7,#e86aa6);color:#fff;border-color:transparent;box-shadow:0 4px 0 #b8487d}
 .newdot{position:absolute;top:5px;right:6px;width:11px;height:11px;border-radius:50%;background:#e5533a;box-shadow:0 0 0 2px var(--card)}
@@ -562,6 +564,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
       <div class="blocks" id="blocks" hidden>
         <button type="button" class="blockbtn" id="manualBtn" aria-label="운전 설명서 열기"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="6" y="3" width="18" height="22" rx="3" fill="#f6f0dc"/><rect x="4" y="2" width="18" height="22" rx="3" fill="#2f9e55"/><rect x="4" y="2" width="5" height="22" rx="2" fill="#23743d"/><rect x="11" y="7" width="8" height="2.4" rx="1.2" fill="#fff"/><rect x="11" y="11" width="6" height="2" rx="1" fill="#cfeedb"/><circle cx="6.5" cy="7" r="1" fill="#fff"/><circle cx="6.5" cy="12" r="1" fill="#fff"/><circle cx="6.5" cy="17" r="1" fill="#fff"/></svg><span>설명서</span></button>
         <button type="button" class="blockbtn" id="attendOpen" aria-label="매일 출석 열기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6" width="22" height="19" rx="4" fill="#ffffff" stroke="#d9a01e" stroke-width="1.6"/><rect x="3" y="6" width="22" height="6" rx="3" fill="#ffd457"/><rect x="8" y="3" width="3" height="6" rx="1.5" fill="#d9a01e"/><rect x="17" y="3" width="3" height="6" rx="1.5" fill="#d9a01e"/><circle cx="14" cy="18.5" r="4.6" fill="url(#gCoin)" stroke="#c98a0e" stroke-width="1"/></svg><span>출석</span><i class="newdot" id="attendDot" hidden></i></button>
+        <button type="button" class="blockbtn" id="bookOpen" aria-label="도장 수첩 열기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="5" y="3" width="19" height="23" rx="3" fill="#23743d"/><rect x="4" y="2" width="19" height="23" rx="3" fill="#2f9e55"/><rect x="7" y="2" width="2" height="23" fill="#23743d" opacity=".6"/><circle cx="15.5" cy="12" r="5" fill="none" stroke="#ffd457" stroke-width="2"/><path d="M13.2 12.2 l1.6 1.6 3-3.2" stroke="#ffd457" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>수첩</span></button>
         <button type="button" class="blockbtn" id="fbOpen" aria-label="공지 보기 · 문의하기" hidden><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 11 H8 L19 5 V23 L8 17 H4 Q2.5 17 2.5 15.5 V12.5 Q2.5 11 4 11Z" fill="#ff9ec7" stroke="#d9669a" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 17 L9 24 H12 L10.5 17.5" fill="#ffd2e6" stroke="#d9669a" stroke-width="1.4" stroke-linejoin="round"/><path d="M22 10.5 Q24.5 14 22 17.5" stroke="#d9669a" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg><span>공지</span></button>
         <button type="button" class="blockbtn" id="shareBtn" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 14 L19 8 M9 14 L19 20" stroke="#3a74c8" stroke-width="2.6" stroke-linecap="round"/><circle cx="8" cy="14" r="4.2" fill="#6aaef7" stroke="#3a74c8" stroke-width="1.6"/><circle cx="20" cy="7.5" r="4.2" fill="#ffd457" stroke="#d9a01e" stroke-width="1.6"/><circle cx="20" cy="20.5" r="4.2" fill="#ff9ec7" stroke="#d9669a" stroke-width="1.6"/></svg><span>공유</span></button>
       </div>
@@ -722,24 +725,7 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
     <p class="small muted" id="boardNote" style="margin:10px 0 0"></p>
   </section>
 
-  <section class="card" id="book" hidden>
-    <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:12px"><h2 style="flex:0 1 auto">도장 수첩</h2><span class="small muted" id="syncNote" style="flex:0 1 auto;text-align:right"></span></div>
-    <div class="stats">
-      <div class="stat"><div class="v" id="sCount">0</div><div class="k">도장 받은 지역</div></div>
-      <div class="stat"><div class="v" id="sTrips">0</div><div class="k">완주한 여정</div></div>
-      <div class="stat"><div class="v" id="sTime">0분</div><div class="k">누적 공부 시간</div></div>
-      <div class="stat"><div class="v" id="sKm">0km</div><div class="k">누적 이동 거리</div></div>
-    </div>
-    <div class="bookbar">
-      <div class="tabs" role="tablist" aria-label="도장 보기">
-        <button type="button" role="tab" data-bf="all" aria-selected="true">전체</button>
-        <button type="button" role="tab" data-bf="done" aria-selected="false">완주한 지역 <span class="num" id="bfDone">0</span></button>
-        <button type="button" role="tab" data-bf="left" aria-selected="false">남은 지역 <span class="num" id="bfLeft">0</span></button>
-      </div>
-      <span class="small muted">지역을 누르면 지도에서 보여주고, 완주한 지역은 색을 바꿀 수 있어요</span>
-    </div>
-    <div id="bookList" style="margin-top:6px"></div>
-  </section>
+
 
   <footer class="credit">© 2026 Zi · 무단 복제 금지</footer>
 </div>
@@ -800,6 +786,28 @@ details.prov .pn{font-family:var(--f-display);font-size:18px;min-width:5.2em}
       <button class="btn gold big wide" id="attendBtn" type="button">오늘 출석 체크</button>
       <p class="mfoot">1~6일차는 코인 3개, 7일차는 10개를 받고 다시 1일차부터 돌아요. 날짜는 한국 시간 기준이에요.</p>
     </div>
+  </div>
+</div>
+<div class="modal" id="bookModal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+  <section class="pages" id="book" hidden>
+    <div class="mhead"><h2 id="bookTitle">도장 수첩</h2><span class="small muted" id="syncNote" style="flex:1;text-align:right"></span><button type="button" class="pill" id="bookClose">닫기</button></div>
+    <div class="stats">
+      <div class="stat"><div class="v" id="sCount">0</div><div class="k">도장 받은 지역</div></div>
+      <div class="stat"><div class="v" id="sTrips">0</div><div class="k">완주한 여정</div></div>
+      <div class="stat"><div class="v" id="sTime">0분</div><div class="k">누적 공부 시간</div></div>
+      <div class="stat"><div class="v" id="sKm">0km</div><div class="k">누적 이동 거리</div></div>
+    </div>
+    <div class="bookbar">
+      <div class="tabs" role="tablist" aria-label="도장 보기">
+        <button type="button" role="tab" data-bf="all" aria-selected="true">전체</button>
+        <button type="button" role="tab" data-bf="done" aria-selected="false">완주한 지역 <span class="num" id="bfDone">0</span></button>
+        <button type="button" role="tab" data-bf="left" aria-selected="false">남은 지역 <span class="num" id="bfLeft">0</span></button>
+      </div>
+      <span class="small muted">지역을 누르면 지도에서 보여주고, 완주한 지역은 색을 바꿀 수 있어요</span>
+    </div>
+    <div id="bookList" style="margin-top:6px"></div>
+  </section>
   </div>
 </div>
 <div class="modal" id="fbModal" hidden>
@@ -1221,8 +1229,13 @@ function liveUntilOf(T,now){if(T.state==="shelter")return T.pauseReason==="phone
   return Math.round(Math.min(arrive,now+80*60e3));}
 function markLive(T){if(!T)return;const now=Date.now();T.liveRef={acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0,until:liveUntilOf(T,now)};}
 function liveOf(T){if(!T)return null;const r=n=>+n.toFixed(4),R=T.liveRef||{acc:Math.round(T.acc),seg:T.seg,state:T.state,pausedAt:T.pausedAt||0,restEnd:T.restEnd||0,until:liveUntilOf(T,Date.now())};
-  return {legs:T.legs.map(l=>[r(l.from.la),r(l.from.lo),r(l.to.la),r(l.to.lo),l.kind,l.min]),totalSec:T.totalSec,...R};}
-function boardDoc(){return {nick:S.nick,trips:S.totals.trips,min:S.totals.min,km:S.totals.km,debt:S.coins<0,live:liveOf(S.trip)};}
+  return {legs:T.legs.map(l=>[r(l.from.la),r(l.from.lo),r(l.to.la),r(l.to.lo),l.kind,l.min]),totalSec:T.totalSec,km:T.km||0,m0:S.totals.min,k0:S.totals.km,...R};}
+/* progress of the current trip counts right away (study time and distance), not only on arrival */
+function tripProg(T,st){if(!T||!T.totalSec)return {min:0,km:0};st=Math.max(0,Math.min(T.totalSec,st));return {min:Math.floor(st/60),km:Math.round((T.km||0)*st/T.totalSec)};}
+function myTotals(now=Date.now()){const T=S&&S.trip,p=T?tripProg(T,T.hidPending?T.acc+Math.max(0,(T.hidAt||now)-T.seg)/1000:studied(now)):{min:0,km:0};
+  return {trips:S.totals.trips,min:S.totals.min+p.min,km:S.totals.km+p.km};}
+function boardDoc(){const T=S.trip,p=T?tripProg(T,(T.liveRef||T).acc):{min:0,km:0};
+  return {nick:S.nick,trips:S.totals.trips,min:S.totals.min+p.min,km:S.totals.km+p.km,debt:S.coins<0,live:liveOf(S.trip)};}
 function save(){if(!S||!accId)return;S.updated=Date.now();
   const bd=boardDoc();
   if(CLOUD){const {F,db}=CLOUD,id=accId,data=JSON.stringify(S),pj=JSON.stringify({...S,updated:0});
@@ -1248,7 +1261,7 @@ function parseLiveDoc(id,x){let live=null;try{live=x.live?JSON.parse(x.live):nul
 function mergeBoard(){if(!CLOUD)return;const m=new Map();
   for(const b of BASE)if(b&&b.nick)m.set(b.id,{...b,live:liveReady?null:b.live||null});
   for(const [id,x] of LIVE){const o=m.get(id);m.set(id,{...(o||{updated:x.liveAt}),...x,trips:Math.max(x.trips,o?o.trips||0:0),min:Math.max(x.min,o?o.min||0:0),km:Math.max(x.km,o?o.km||0:0)});}
-  if(S&&accId){const o=m.get(accId)||{};m.set(accId,{...o,id:accId,nick:S.nick,trips:S.totals.trips,min:S.totals.min,km:S.totals.km,updated:o.updated||S.created||Date.now(),live:liveOf(S.trip)});}
+  if(S&&accId){const o=m.get(accId)||{},t=myTotals();m.set(accId,{...o,id:accId,nick:S.nick,trips:t.trips,min:t.min,km:t.km,updated:o.updated||S.created||Date.now(),live:liveOf(S.trip)});}
   BOARD=[...m.values()];renderBoard();renderOthers();}
 function cacheKey(){return BOARD_CACHE+":"+((window.FIREBASE_CONFIG&&window.FIREBASE_CONFIG.projectId)||"");}
 function patchCache(id,row){const i=BASE.findIndex(b=>b.id===id);if(i>=0)BASE[i]={...BASE[i],...row};else BASE.push({id,...row});
@@ -1445,7 +1458,7 @@ function restName(T,at){const p=posAt(T,at),l=p.leg;
   if(l.kind==="ship")return "선내 휴게실";if(l.kind==="plane")return "공항 라운지";
   const la=MAP.LAT0-p.y/MAP.S,lo=p.x/(MAP.CK*MAP.S)+MAP.LON0,n=nearest(la,lo),base=n.r.n.replace(/(시|군|구)$/,"");
   return l.kind==="train"?`${base}역 잠깐 정차`:`${base} 휴게소`;}
-$("#goBtn").addEventListener("click",()=>{if(!dest)return;const pl=PLANS[mode],now=Date.now();
+$("#goBtn").addEventListener("click",()=>{if(!dest)return;idleStart(true);const pl=PLANS[mode],now=Date.now();
   const T={dest:dest.key,from:S.origin,mode,totalSec:pl.min*60,km:pl.km,legs:pl.legs,bonus:pl.bonus,acc:0,seg:now,state:"drive",restEnd:0,restsTaken:0,pausedAt:0,startedAt:now,stops:[],tolls:[],tollsPaid:0};
   for(let k=1;k*60<pl.min;k++)T.stops.push({at:k*3600});T.stops.forEach(s=>s.name=restName(T,s.at));
   const sc=legScale(T);let t0=0;for(const l of T.legs){const ls=l.min*60*sc;if((l.kind==="car"||l.kind==="bus")&&l.km>=TOLL_MIN){const n=Math.ceil(l.km/TOLL_KM);for(let i=0;i<n;i++)T.tolls.push({at:Math.round(t0+(i+.5)/n*ls)});}t0+=ls;}
@@ -1478,17 +1491,18 @@ function renderDrive(force){const T=S.trip;if(!T)return;const now=Date.now(),d=B
   if(T.state==="rest"){$("#restName").textContent=(T.stops[T.restsTaken]||{}).name||"휴게소";$("#restClock").textContent=fmtMS((T.restEnd-now)/1000);}
   const phone=T.state==="shelter"&&T.pauseReason==="phone";$("#warnBar").hidden=!phone;$("#shelterTitle").textContent=phone?"자동으로 졸음쉼터에 정차했어요":"잠깐 정차했어요";
   if(phone)$("#warnText").textContent=`공부 중에 다른 탭이나 앱으로 넘어갔어요. ${warnMsg(T.warnN||warnToday()||1,T.warnFine||0)} 돌아왔으면 다시 출발하세요.`;
-  {const n=warnToday();$("#guardNote").textContent=`딴짓 감지 중 · 다른 탭이나 앱으로 가면 자동으로 졸음쉼터에 정차해요 · 오늘 경고 ${n}번`+(nextFines()?" · 다음 경고는 벌금":"");}
+  {const n=warnToday();$("#guardNote").textContent=`딴짓 감지 중 · 다른 탭이나 앱으로 가면 자동으로 졸음쉼터에 정차해요 · 오늘 경고 ${n}번`+(nextFines()?" · 다음 경고는 벌금":"")
+    +(IDLE.ok?" · 화면을 꺼도 계속 달려요":IDLE.supported?" · 출발할 때 '기기 사용 감지'를 허용하면 화면을 꺼도 계속 달려요":" · 이 브라우저(아이폰 등)는 화면 꺼짐과 앱 전환을 구분하지 못해서, 화면을 끄면 정차해요");}
   if(T.state==="shelter"){const s=(now-T.pausedAt)/1000;$("#shelterFor").textContent=`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;}else{$("#quitConfirm").hidden=true;$("#quitBtn").hidden=false;}
   updateVeh(ME,p.leg.kind,p.x,p.y,p.dx,p.dy,T.state,S.coins<0);
   if(force||now-lastRouteDraw>2000){drawRoute(T.legs,st,T.totalSec);lastRouteDraw=now;}
 }
 $("#shelterBtn").addEventListener("click",()=>{const T=S.trip,now=Date.now();if(!T||T.state!=="drive")return;T.acc=studied(now);T.state="shelter";T.pausedAt=now;markLive(T);save();wakeOff();renderDrive(true);});
-$("#resumeBtn").addEventListener("click",()=>{const T=S.trip;if(!T||T.state!=="shelter")return;T.state="drive";T.pauseReason=null;T.seg=Date.now();markLive(T);save();chime("go");wakeOn();renderDrive(true);});
+$("#resumeBtn").addEventListener("click",()=>{const T=S.trip;idleStart(true);if(!T||T.state!=="shelter")return;T.state="drive";T.pauseReason=null;T.seg=Date.now();markLive(T);save();chime("go");wakeOn();renderDrive(true);});
 $("#restSkip").addEventListener("click",()=>{const T=S.trip;if(!T||T.state!=="rest")return;T.restsTaken++;T.state="drive";T.seg=Date.now();markLive(T);save();chime("go");renderDrive(true);});
 $("#quitBtn").addEventListener("click",()=>{$("#quitConfirm").hidden=false;$("#quitBtn").hidden=true;});
 $("#quitNo").addEventListener("click",()=>{$("#quitConfirm").hidden=true;$("#quitBtn").hidden=false;});
-$("#quitYes").addEventListener("click",()=>{const T=S.trip;if(!T)return;const m=Math.floor(T.acc/60);S.totals.min+=m;S.trip=null;save();wakeOff();clearVehicle();setTripPins(null);toast(`여정을 마쳤어요. 공부한 ${fmtMin(m)}은 기록에 더했어요.`);loadStage1();route();});
+$("#quitYes").addEventListener("click",()=>{const T=S.trip;if(!T)return;const m=Math.floor(T.acc/60);S.totals.min+=m;S.totals.km+=tripProg(T,T.acc).km;S.trip=null;save();wakeOff();clearVehicle();setTripPins(null);toast(`여정을 마쳤어요. 공부한 ${fmtMin(m)}은 기록에 더했어요.`);loadStage1();route();});
 let lastArrival=null;
 function arriveNow(){const T=S.trip,ds=kstDate().replace(/-/g,".");
   const prev=S.stamps[T.dest],min=Math.round(T.totalSec/60);S.stamps[T.dest]={at:ds,min,mode:T.mode,count:(prev?prev.count:0)+1};
@@ -1531,7 +1545,10 @@ function estLive(L,now){let st=L.acc,t;if(L.state==="shelter")return {st,state:"
 function isLive(b,now=Date.now()){const L=b.live;if(!L||!L.legs||!L.legs.length)return false;
   if(estLive(L,now).st>=L.totalSec)return false;if(L.until&&now>L.until)return false;if(L.state==="shelter"&&now-L.pausedAt>2*3600e3)return false;if(now-(b.liveAt||b.updated||0)>2*DAY)return false;return true;}
 function renderBoard(){
-  const f=lbField,list=BOARD.filter(b=>b&&b.nick).map(b=>({...b,v:b[f]||0})).sort((a,b)=>b.v-a.v||(a.updated||0)-(b.updated||0));
+  const f=lbField,now0=Date.now(),mine=S?myTotals(now0):null;
+  const valOf=b=>{if(mine&&b.id===accId)return mine[f]||0;const L=b.live;
+    if(f!=="trips"&&L&&L.m0!=null&&isLive(b,now0)){const E=estLive(L,now0),p=tripProg({totalSec:L.totalSec,km:L.km},E.st);return Math.max(b[f]||0,f==="min"?L.m0+p.min:L.k0+p.km);}return b[f]||0;};
+  const list=BOARD.filter(b=>b&&b.nick).map(b=>({...b,v:valOf(b)})).sort((a,b)=>b.v-a.v||(a.updated||0)-(b.updated||0));
   let rank=0,prev=null;list.forEach((b,i)=>{if(b.v!==prev){rank=i+1;prev=b.v;}b.rank=rank;});
   const pod=$("#podium");pod.innerHTML="";
   const medal=(n)=>`<svg class="medal" viewBox="0 0 24 24"><circle cx="12" cy="13" r="10" fill="${n===2?"#7d8891":"#8e4f27"}"/><circle cx="12" cy="11" r="10" fill="${n===2?"#e3e8ec":"#e7a173"}"/><text x="12" y="15.5" text-anchor="middle" font-size="11" font-weight="700" fill="${n===2?"#55606a":"#6a3414"}" font-family="Arial">${n}</text></svg>`;
@@ -1560,7 +1577,7 @@ function renderOthers(){
   const sig=[...seen].sort().map(id=>{const b=BOARD.find(x=>x.id===id);return id+":"+(b&&b.live?b.live.totalSec+"/"+b.live.legs.length:"");}).join(",");if(sig!==renderOthers.sig){renderOthers.sig=sig;drawOtherRoutes(seen);}
   const meOn=!!(S&&S.trip&&(()=>{const L=liveOf(S.trip);return !L.until||L.until>now;})()),local=live+(meOn?1:0);
   const total=CLOUD&&LIVE_TOTAL!=null?Math.max(LIVE_TOTAL,local):local;
-  const lc=$("#liveCount");lc.hidden=!total;lc.textContent=`지금 달리는 운전자 ${total}명`+(total>local?` · 지도엔 최근 ${cars+(meOn?1:0)}대`:"");
+  const lc=$("#liveCount");lc.hidden=!total;lc.textContent=`지금 달리는 운전자 ${total}명`;
 }
 
 function drawOtherRoutes(ids){if(!G.others)return;G.others.innerHTML="";
@@ -1587,7 +1604,8 @@ function buildRecolor(){const r=BYKEY[recolorKey],cur=S.stamps[recolorKey].color
   return box;}
 document.querySelectorAll("[data-bf]").forEach(b=>b.addEventListener("click",()=>{bookFilter=b.dataset.bf;document.querySelectorAll("[data-bf]").forEach(x=>x.setAttribute("aria-selected",x===b));renderBook();}));
 function focusRegion(r,scroll=true){const [x,y]=prj(r.la,r.lo),w=300,h=w*VH;setView({x:x-w/2,y:y-h*.55,w});if(scroll)$(".mapcard").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});}
-function renderBook(){const got=Object.keys(S.stamps).filter(k=>BYKEY[k]).length;$("#sCount").textContent=`${got}/${REGIONS.length}`;$("#sTrips").textContent=`${S.totals.trips}번`;$("#sTime").textContent=fmtMin(S.totals.min);$("#sKm").textContent=`${S.totals.km.toLocaleString()}km`;
+function renderBookStats(){if(!S)return;const got=Object.keys(S.stamps).filter(k=>BYKEY[k]).length,t=myTotals();$("#sCount").textContent=`${got}/${REGIONS.length}`;$("#sTrips").textContent=`${t.trips}번`;$("#sTime").textContent=fmtMin(t.min);$("#sKm").textContent=`${t.km.toLocaleString()}km`;}
+function renderBook(){if(!S)return;const got=Object.keys(S.stamps).filter(k=>BYKEY[k]).length;renderBookStats();
   $("#bfDone").textContent=got;$("#bfLeft").textContent=REGIONS.length-got;
   const box=$("#bookList");box.innerHTML="";let shown=0;
   for(const p of PROVS){const rs=REGIONS.filter(r=>r.p===p),n=rs.filter(r=>S.stamps[r.key]).length;
@@ -1596,9 +1614,9 @@ function renderBook(){const got=Object.keys(S.stamps).filter(k=>BYKEY[k]).length
     det.innerHTML=`<summary><span class="pn">${p}</span><span class="bar"><i style="width:${(n/rs.length*100).toFixed(1)}%"></i></span><span class="num small">${bookFilter==="left"?`남은 ${rs.length-n}곳`:`${n}/${rs.length}`}</span></summary>`;
     const w=document.createElement("div");w.className="stamps";
     for(const r of vis){const s=document.createElement("button"),st=S.stamps[r.key];s.type="button";s.className="st"+(st?" got":"")+(r.key===S.origin?" cur":"");
-      s.textContent=r.n+(st&&st.count>1?` ×${st.count}`:"");if(st){const d=document.createElement("span");d.className="d";d.textContent=st.at.slice(5);s.append(d);}
+      s.textContent=r.n;
       s.title=st?`${st.at} 완주 · ${st.min}분 · ${MODE[st.mode]||""}`:(r.key===S.origin?"지금 있는 곳":"아직 안 감");if(st){const dot=document.createElement("i");dot.className="dot";dot.style.background=(PAINT[st.color]||PAINT.yellow).top;s.prepend(dot);}
-      s.addEventListener("click",()=>{focusRegion(r,!st);if(st)openRecolor(r.key);});w.append(s);}
+      s.addEventListener("click",()=>{if(st){focusRegion(r,false);openRecolor(r.key);}else{closeModal("#bookModal");focusRegion(r,true);}});w.append(s);}
     det.append(w);if(recolorKey&&BYKEY[recolorKey]&&BYKEY[recolorKey].p===p&&S.stamps[recolorKey])det.append(buildRecolor());box.append(det);}
   if(!shown){const d=document.createElement("p");d.className="provempty";d.textContent=bookFilter==="done"?"아직 완주한 지역이 없어요. 첫 도장을 받으러 출발해 보세요.":"남은 지역이 없어요. 전국을 다 깼어요!";box.append(d);}}
 
@@ -1615,6 +1633,7 @@ function route(){
   $("#who").hidden=!S;if(S)$("#whoNick").textContent=S.nick;renderCoins();showBlocks();if(S)renderAttend();
   $("#book").hidden=!S;applySky();drawStamps();drawTrail();setHomePin();renderBoard();
   if(!S){show("login");clearVehicle();return;}
+  if(S.trip&&S.trip.hidPending)resolveHidden();
   if(S.trip){advance(Date.now());}
   if(S.trip){show("drive");const T=S.trip;setDestPin(BYKEY[T.dest]);if(!pinRests.length&&!pinTolls.length)setTripPins(T);routePts=T.legs.flatMap(l=>legPts(l));showViewButtons();renderDrive(true);setView(fitPoints(routePts));return;}
   renderBook();
@@ -1622,17 +1641,37 @@ function route(){
   show("home");$("#hereName").textContent=BYKEY[S.origin].label;renderAttend();if(!wheelItems.length&&!spinning)restorePick();requestAnimationFrame(sizeCanvas);renderTokens();
   if(!dest)clearVehicle();
 }
-setInterval(()=>{if(S&&S.trip){advance(Date.now());if(S&&S.trip&&!$("#drive").hidden)renderDrive();}
+setInterval(()=>{if(S&&S.trip&&!S.trip.hidPending){advance(Date.now());if(S&&S.trip&&!$("#drive").hidden)renderDrive();}
   if(S&&!$("#home").hidden&&S.pick.lockUntil)renderTokens();},250);
 setInterval(renderOthers,1000);
+setInterval(()=>{if(document.hidden||!S)return;if(S.trip&&lbField!=="trips")renderBoard();if(!$("#bookModal").hidden)renderBookStats();},20000);
 setInterval(applySky,60000);
 /* 딴짓 감지는 항상 켜져 있어요(끌 수 없음). 예전에 꺼 둔 설정도 무시해요. */
 const guardOn=true;try{localStorage.removeItem("sdrive-guard");}catch(e){}
+/* 화면 꺼짐 vs 다른 앱: Idle Detection(크롬·엣지·삼성 인터넷)으로 화면 잠금을 확인할 수 있으면,
+   숨겨진 순간엔 일단 계속 달리고 돌아왔을 때 판정해요. 화면이 잠겼던 거면 그대로, 아니면 숨겨진 시각으로 되돌려 정차+경고. */
+const IDLE={det:null,ok:false,lockAt:0,supported:"IdleDetector" in window};
+function markLock(){IDLE.lockAt=Date.now();const T=S&&S.trip;if(T&&T.hidPending&&!T.hidLocked){T.hidLocked=true;save();}}
+async function idleStart(ask){if(IDLE.ok||!IDLE.supported)return;
+  try{if(!ask){const q=await navigator.permissions.query({name:"idle-detection"});if(q.state!=="granted")return;}
+    else if(await IdleDetector.requestPermission()!=="granted")return;
+    const d=new IdleDetector();d.addEventListener("change",()=>{if(d.screenState==="locked")markLock();});await d.start({threshold:60000});IDLE.det=d;IDLE.ok=true;
+    if(S&&S.trip&&!$("#drive").hidden)renderDrive(true);}catch(e){console.warn("idle",e);}}
+function checkLockSoon(){[600,1500,3000,6000].forEach(ms=>setTimeout(()=>{if(IDLE.det&&IDLE.det.screenState==="locked")markLock();},ms));}
+function pausePhone(T,at,warn){advance(at);if(!S.trip||S.trip.state!=="drive")return;T=S.trip;T.acc=T.acc+Math.max(0,at-T.seg)/1000;T.state="shelter";T.pausedAt=at;
+  T.pauseReason=warn?"phone":"left";if(warn){T.warnPending=true;addWarning(T);}markLive(T);if(!warn)T.liveRef.until=Date.now();}
+function resolveHidden(){const T=S&&S.trip;if(!T||!T.hidPending)return false;const at=T.hidAt||Date.now();T.hidPending=false;
+  if(T.hidLocked){T.hidLocked=false;advance(Date.now());save();if(S.trip)toast("화면이 꺼져 있던 동안에도 계속 달렸어요");return true;}
+  pausePhone(T,at,true);save();return true;}
 document.addEventListener("visibilitychange",()=>{
-  if(document.hidden){if(guardOn&&S&&S.trip&&S.trip.state==="drive"){advance(Date.now());const T=S.trip;if(T&&T.state==="drive"){const now=Date.now();T.acc=studied(now);T.state="shelter";T.pausedAt=now;T.pauseReason="phone";T.warnPending=true;markLive(T);addWarning(T);save();}}return;}
+  if(document.hidden){if(guardOn&&S&&S.trip&&S.trip.state==="drive"&&!S.trip.hidPending){advance(Date.now());const T=S.trip;if(T&&T.state==="drive"){const now=Date.now();
+      if(IDLE.ok){T.hidAt=now;T.hidPending=true;T.hidLocked=!!(IDLE.det&&IDLE.det.screenState==="locked");save();checkLockSoon();}
+      else{pausePhone(T,now,true);save();}}}return;}
   applySky();
+  if(S&&S.trip&&S.trip.hidPending){/* 잠금 이벤트가 늦게 도착할 수 있어 잠깐 기다렸다 판정 */setTimeout(()=>{if(document.hidden)return;const w=S&&S.trip&&S.trip.hidPending;resolveHidden();if(w&&S&&S.trip&&S.trip.warnPending){S.trip.warnPending=false;save();chime("warn");toast(S.trip.warnFine?`운전 중 전자기기 사용 · 오늘 경고 ${S.trip.warnN}번째 · 벌금 코인 −${S.trip.warnFine}`:`운전 중 전자기기 사용 경고 · 오늘 ${S.trip.warnN}번째 · 졸음쉼터에 정차했어요`);renderCoins();}if(S&&S.trip&&!$("#drive").hidden)renderDrive(true);},900);}
   if(S&&S.trip&&S.trip.warnPending){S.trip.warnPending=false;save();chime("warn");toast(S.trip.warnFine?`운전 중 전자기기 사용 · 오늘 경고 ${S.trip.warnN}번째 · 벌금 코인 −${S.trip.warnFine}`:`운전 중 전자기기 사용 경고 · 오늘 ${S.trip.warnN}번째 · 졸음쉼터에 정차했어요`);renderCoins();if(!$("#drive").hidden)renderDrive(true);}
   if(S&&S.trip&&S.trip.state==="drive")wakeOn();});
+window.addEventListener("pagehide",()=>{const T=S&&S.trip;if(T&&T.hidPending&&!T.hidLocked){T.hidPending=false;pausePhone(T,T.hidAt||Date.now(),false);save();}});
 window.addEventListener("resize",()=>{placeAll();if(!$("#home").hidden)sizeCanvas();});
 document.fonts&&document.fonts.ready.then(()=>drawWheel());
 new ResizeObserver(placeAll).observe(bbLayer);
@@ -1648,12 +1687,16 @@ let fbKind="오류";
 document.querySelectorAll("#fbModal [data-kind]").forEach(b=>b.addEventListener("click",()=>{fbKind=b.dataset.kind;document.querySelectorAll("#fbModal [data-kind]").forEach(x=>{x.setAttribute("aria-checked",x===b);x.setAttribute("aria-selected",x===b);});}));
 $("#fbText").addEventListener("input",()=>{$("#fbCount").textContent=`${[...$("#fbText").value].length} / 100`;});
 /* 공지: 새 공지는 이 목록 맨 앞에 {date:"2026-10-25",title:"제목",body:"내용"} 으로 넣으면 돼요 */
-const NOTICES=[];
+const NOTICES=[
+  {date:"2026-10-25",title:"업데이트 안내",body:"· 화면을 꺼도 계속 달려요: 출발할 때 '기기 사용 감지'를 허용하면 화면이 꺼져 있는 동안에도 공부 시간이 흘러요. 다른 앱이나 탭으로 가면 지금처럼 정차와 경고가 있어요. (크롬·엣지·삼성 인터넷, 아이폰은 화면을 켜 두세요)\n· 누적 공부 시간과 이동 거리가 완주 전에도 공부한 만큼 바로 올라가요.\n· 도장 수첩이 위쪽 '수첩' 블록으로 옮겨졌어요."}
+];
 function renderNotices(){const box=$("#noticeList");box.innerHTML="";
   if(!NOTICES.length){const p=document.createElement("p");p.className="empty";p.textContent="아직 올라온 공지가 없어요.";box.append(p);return;}
   for(const n of NOTICES){const d=document.createElement("div");d.className="notice";d.innerHTML=`<b>${esc(n.title)}</b><span class="d">${esc(n.date||"")}</span>${n.body?`<p>${esc(n.body)}</p>`:""}`;box.append(d);}}
 $("#fbOpen").addEventListener("click",()=>{$("#fbErr").textContent="";renderNotices();openModal("#fbModal");});
 $("#fbClose").addEventListener("click",()=>closeModal("#fbModal"));
+$("#bookOpen").addEventListener("click",()=>{if(!S)return;renderBook();openModal("#bookModal");});
+$("#bookClose").addEventListener("click",()=>{if(recolorKey)closeRecolor();closeModal("#bookModal");});
 $("#fbForm").addEventListener("submit",async e=>{e.preventDefault();const err=$("#fbErr");err.textContent="";
   const text=$("#fbText").value.trim().slice(0,100);
   if(!text){err.textContent="내용을 적어 주세요.";return;}
@@ -1671,7 +1714,7 @@ $("#fbForm").addEventListener("submit",async e=>{e.preventDefault();const err=$(
   if(!ok){err.textContent="보내지 못했어요. 인터넷 연결을 확인하고 다시 눌러 주세요.";return;}
   try{localStorage.setItem("sdrive-fb-last",String(Date.now()));}catch(x){}
   $("#fbText").value="";$("#fbCount").textContent="0 / 100";closeModal("#fbModal");chime("go");toast("보냈어요. 소중한 의견 고마워요!");});
-function showBlocks(){$("#blocks").hidden=!(rulesSeen||S);$("#manualBtn").hidden=!rulesSeen;$("#shareBtn").hidden=!rulesSeen;$("#fbOpen").hidden=!(rulesSeen||S);$("#attendOpen").hidden=!S;$("#rulesClose").hidden=!rulesSeen;}
+function showBlocks(){$("#blocks").hidden=!(rulesSeen||S);$("#manualBtn").hidden=!rulesSeen;$("#shareBtn").hidden=!rulesSeen;$("#fbOpen").hidden=!(rulesSeen||S);$("#attendOpen").hidden=!S;$("#bookOpen").hidden=!S;$("#rulesClose").hidden=!rulesSeen;}
 $("#rulesOk").addEventListener("click",()=>{rulesSeen=true;try{localStorage.setItem("sdrive-rules-seen","1");}catch(e){}closeModal("#rulesModal");showBlocks();toast("설명서는 위쪽 '설명서' 블록에서 언제든 다시 볼 수 있어요");});
 const car=$("#carousel"),slidesEl=[...car.querySelectorAll(".slide")];let cIdx=0;
 slidesEl.forEach((_,i)=>{const d=document.createElement("button");d.type="button";d.setAttribute("aria-label",`${i+1}쪽`);d.addEventListener("click",()=>goSlide(i));$("#cDots").append(d);});
@@ -1693,10 +1736,10 @@ $("#copyLink").addEventListener("click",()=>copyText(SHARE_URL,$("#shareLink")))
 $("#copyMsg").addEventListener("click",()=>copyText($("#shareMsg").value,$("#shareMsg")));
 $("#shareClose").addEventListener("click",()=>closeModal("#shareModal"));
 document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m&&(m.id!=="rulesModal"||rulesSeen))closeModal("#"+m.id);}));
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#attendModal").hidden){closeModal("#attendModal");return;}if(!$("#fbModal").hidden){closeModal("#fbModal");return;}if(!$("#shareModal").hidden)closeModal("#shareModal");else if(!$("#rulesModal").hidden&&rulesSeen)closeModal("#rulesModal");});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#bookModal").hidden){if(recolorKey)closeRecolor();closeModal("#bookModal");return;}if(!$("#attendModal").hidden){closeModal("#attendModal");return;}if(!$("#fbModal").hidden){closeModal("#fbModal");return;}if(!$("#shareModal").hidden)closeModal("#shareModal");else if(!$("#rulesModal").hidden&&rulesSeen)closeModal("#rulesModal");});
 showBlocks();if(!rulesSeen)openModal("#rulesModal");
 
-buildMap();buildDeco();applySky();
+buildMap();buildDeco();applySky();idleStart(false);
 (async()=>{route();await storeReady;
   if(CLOUD){CLOUD.A.onAuthStateChanged(CLOUD.auth,async user=>{if(!user||S||loggingIn)return;try{const d=await cloudLoad(user.uid);if(d&&!S){S=upgrade(d);accId=user.uid;restorePick();save();route();}}catch(e){console.error(e);}});return;}
   let sid=null;try{sid=localStorage.getItem("sdrive-session");}catch(e){}
